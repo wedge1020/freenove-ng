@@ -8,6 +8,7 @@
 
 #include <wiringPi.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "LED.h"
 
@@ -28,7 +29,14 @@ int  LED :: getPin (void) {
 }
 
 char * LED :: getState (void) {
-    char result[6];
+    char *result          = NULL;
+
+    result                = (char *) malloc (sizeof (char) * 6);
+    if (result           == NULL)
+    {
+        fprintf (stderr, "[LED] ERROR allocating memory for getState() result");
+        exit (1);
+    }
 
     if (this -> state    == HIGH) {
         strncpy (result, "HIGH", 5);
