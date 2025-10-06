@@ -18,7 +18,7 @@ int main (void) {
     
     wiringPiSetup ();                                // Initialize wiringPi
 
-    LED blink  = new LED (ledPin, LOW);              // New LED instance: blink
+    LED blink (ledPin, LOW);                         // New LED instance: blink
     
     printf ("Using pin: %d\n", blink.getPin ());     // Output information on terminal
 
