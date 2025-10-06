@@ -11,27 +11,15 @@
 #include "LED.h"
 
 LED :: LED (int pin) {
-    if (wiringpisetup () != -1) {
-        this -> pin       = pin;
-        this -> state     = LOW;    
-        pinMode (pin, OUTPUT);
-    }
-    else {
-        fprintf (stderr, "[ERROR] Could not initialize wiringPi for LED\n");
-        exit (1);
-    }
+    this -> pin           = pin;
+    this -> state         = LOW;    
+    pinMode (pin, OUTPUT);
 }
 
 LED :: LED (int pin, int state) {
-    if (wiringpisetup () != -1) {
-        this -> pin       = pin;
-        this -> state     = state;    
-        pinMode (pin, OUTPUT);
-    }
-    else {
-        fprintf (stderr, "[ERROR] Could not initialize wiringPi for LED\n");
-        exit (1);
-    }
+    this -> pin           = pin;
+    this -> state         = state;    
+    pinMode (pin, OUTPUT);
 }
 
 int  LED :: getPin (void) {
@@ -39,7 +27,7 @@ int  LED :: getPin (void) {
 }
 
 char * LED :: getState (void) {
-    if (this -> state == HIGH) {
+    if (this -> state    == HIGH) {
         return ("HIGH");
     else {
         return ("LOW");
