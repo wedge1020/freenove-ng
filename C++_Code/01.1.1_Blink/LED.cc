@@ -8,6 +8,7 @@
 
 #include <wiringPi.h>
 #include <stdio.h>
+#include <string.h>
 #include "LED.h"
 
 LED :: LED (int pin) {
@@ -27,13 +28,13 @@ int  LED :: getPin (void) {
 }
 
 char * LED :: getState (void) {
-    char result[5];
+    char result[6];
 
     if (this -> state    == HIGH) {
-        strcpy (result, "HIGH");
+        strncpy (result, "HIGH", 5);
     }
     else {
-        strcpy (result, "LOW");
+        strncpy (result, "LOW",  5);
     }
 
     return (result);
