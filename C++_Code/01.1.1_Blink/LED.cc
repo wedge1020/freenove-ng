@@ -27,11 +27,16 @@ int  LED :: getPin (void) {
 }
 
 char * LED :: getState (void) {
+    char result[5];
+
     if (this -> state    == HIGH) {
-        return ("HIGH");
-    else {
-        return ("LOW");
+        strcpy (result, "HIGH");
     }
+    else {
+        strcpy (result, "LOW");
+    }
+
+    return (result);
 }
 
 void LED :: toggle (void) {
