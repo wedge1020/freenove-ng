@@ -1,5 +1,5 @@
 //
-// Filename    : Relay.c
+// Filename    : relay.c
 // Description : Control Motor with Button and Relay 
 // Author      : www.freenove.com
 // modification: 2025/10/21
@@ -32,8 +32,16 @@ int main (void)
     sli captureTime              = 50;   // set the button state stable time
     sli lastChangeTime           = 0;    // store the change time of button state
 
-    wiringPiSetup ();    
-    
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Bring wiringPi functionality online
+    //
+    if (wiringPiSetup () == -1)
+    {
+        fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
+        exit (1);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Configure button and relay
