@@ -6,18 +6,17 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
-#include <wiringPi.h>
+#include <math.h>
 #include <softPwm.h>
+#include <stdint.h>          // for C99 int32_t and int64_t types
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <wiringPi.h>
 #include <ADCDevice.h>
 
 #define  motorPin1  2        // the wiringPi pin connected to L293D
 #define  motorPin2  0
 #define  enablePin  3
-
-typedef  signed long int sli;
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -29,16 +28,16 @@ ADCDevice *adc;
 //
 // Function prototypes
 //
-sli  map   (sli, sli, sli, sli, sli);
-void motor (int);
+int64_t  map   (int64_t, int64_t, int64_t, int64_t, int64_t);
+void     motor (int32_t);
 
-int main (void)
+int32_t main (void)
 {       
     ////////////////////////////////////////////////////////////////////////////////////
     //  
     // Declare and initialize variables
     //  
-    int        value     = 0;
+    int32_t  value       = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //  
@@ -77,7 +76,9 @@ int main (void)
 //
 // Map function: map the value from a range to another range.
 //
-sli map (sli value, sli fromLow, sli fromHigh, sli toLow, sli toHigh)
+int64_t map (int64_t value,    int64_t fromLow,
+             int64_t fromHigh, int64_t toLow,
+             int64_t toHigh)
 {
     return ((toHigh - toLow) * (value - fromLow) / (fromHigh - fromLow) + toLow);
 }
@@ -86,9 +87,9 @@ sli map (sli value, sli fromLow, sli fromHigh, sli toLow, sli toHigh)
 //
 // Motor function: determine the direction and speed of the motor according to the ADC 
 //
-void motor (int ADCvalue)
+void motor (int32_t ADCvalue)
 {
-    int value       = 0;
+    int32_t  value  = 0;
 
     value           = ADCvalue - 128;
     if (value      >  0)

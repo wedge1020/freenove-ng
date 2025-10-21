@@ -11,12 +11,12 @@
 // Preprocessor directives: include headers and define symbols
 //
 #include <wiringPi.h>
+#include <stdint.h>                      // for C99 int32_t and int64_t types
 #include <stdio.h>
+#include <stdlib.h>
 
 #define  relayPin  0                     // define the relayPin
 #define  buttonPin 1                     // define the buttonPin
-
-typedef  signed long int sli;
 
 int main (void)
 {
@@ -24,19 +24,19 @@ int main (void)
     //
     // Declare and initialize variables
     //
-    int buttonState              = HIGH; // store the state of button
-    int duration                 = 0;    // duration of state change
-    int lastbuttonState          = HIGH; // store the lastState of button
-    int reading                  = 0;    // button state
-    int relayState               = LOW;  // store the state of relay
-    sli captureTime              = 50;   // set the button state stable time
-    sli lastChangeTime           = 0;    // store the change time of button state
+    int32_t  buttonState         = HIGH; // store the state of button
+    int32_t  duration            = 0;    // duration of state change
+    int32_t  lastbuttonState     = HIGH; // store the lastState of button
+    int32_t  reading             = 0;    // button state
+    int32_t  relayState          = LOW;  // store the state of relay
+    int64_t  captureTime         = 50;   // set the button state stable time
+    int64_t  lastChangeTime      = 0;    // store the change time of button state
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Bring wiringPi functionality online
     //
-    if (wiringPiSetup () == -1)
+    if (wiringPiSetup ()        == -1)
     {
         fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
         exit (1);

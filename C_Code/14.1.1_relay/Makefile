@@ -1,8 +1,8 @@
-LIBS = -lm -lwiringPi -lADCDevice
+LIBS = -lm -lwiringPi
 CFLAGS = -Wall --std=gnu18
 INC = 
 CC = gcc
-PROJ = ADC
+PROJ = relay
 all: $(PROJ)
 
 debug: CFLAGS += -DDEBUG -g
