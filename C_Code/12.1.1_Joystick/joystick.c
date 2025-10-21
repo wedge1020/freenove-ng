@@ -1,10 +1,10 @@
-/***
- *** Filename    : joystick.c
- *** Description : Read the Joystick
- ***               Uses simplified C port of ADCDevice library.
- *** Modification: 2025/09/28    
- ***
- **************************************************************************************/
+//
+// Filename    : joystick.c
+// Description : Read the Joystick
+//               Uses simplified C port of ADCDevice library.
+// Modification: 2025/10/21    
+//
+////////////////////////////////////////////////////////////////////////////////////////
         
 #include <wiringPi.h>
 #include <softPwm.h>
@@ -13,6 +13,12 @@
 #include <ADCDevice.h>
 
 #define  Z_Pin  1     // define pin for Z-axis
+
+////////////////////////////////////////////////////////////////////////////////////////
+//  
+// Declare Global ADCDevice variable
+//  
+ADCDevice *adc;
         
 int main (void)
 {       
@@ -46,10 +52,10 @@ int main (void)
     //
     while (1)
     {
-		////////////////////////////////////////////////////////////////////////////////
-		//
-		// Read joystick values
-		//
+        ////////////////////////////////////////////////////////////////////////////////
+        //
+        // Read joystick values
+        //
         val_X      = adc -> analogRead (1); // read analog X-axis value
         val_Y      = adc -> analogRead (0); // read analog Y-axis value
         val_Z      = digitalRead (Z_Pin);   // read digital Z-axis value

@@ -1,17 +1,23 @@
-/***
- *** Filename    : nightlamp.c
- *** Description : Nightlamp - use photoresistor to control LED.
- ***               Uses simplified C port of ADCDevice library.
- *** Modification: 2025/09/28    
- ***
- **************************************************************************************/
-        
+//
+// Filename    : nightlamp.c
+// Description : Nightlamp - use photoresistor to control LED.
+//               Uses simplified C port of ADCDevice library.
+// Modification: 2025/09/28    
+//
+////////////////////////////////////////////////////////////////////////////////////////
+
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <stdio.h>
 #include <ADCDevice.h>
 
 #define  ledPin 0
+
+////////////////////////////////////////////////////////////////////////////////////////
+//  
+// Declare Global ADCDevice variable
+//  
+ADCDevice *adc;
         
 int main (void)
 {       

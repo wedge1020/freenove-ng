@@ -2,7 +2,7 @@
 // Filename    : motor.c
 // Description : Motor - control the motor
 //               Uses simplified C port of ADCDevice library.
-// Modification: 2025/10/20    
+// Modification: 2025/10/21
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
