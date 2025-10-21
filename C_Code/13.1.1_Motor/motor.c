@@ -1,11 +1,11 @@
-/***
- *** Filename    : motor.c
- *** Description : Motor - control the motor
- ***               Uses simplified C port of ADCDevice library.
- *** Modification: 2025/10/20    
- ***
- **************************************************************************************/
-        
+//
+// Filename    : motor.c
+// Description : Motor - control the motor
+//               Uses simplified C port of ADCDevice library.
+// Modification: 2025/10/20    
+//
+////////////////////////////////////////////////////////////////////////////////////////
+
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <stdio.h>
@@ -18,6 +18,12 @@
 #define  enablePin  3
 
 typedef  signed long int sli;
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// Global ADCDevice variable
+//
+ADCDevice *adc;
         
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -33,7 +39,6 @@ int main (void)
     // Declare and initialize variables
     //  
     int        value     = 0;
-    float      voltage   = 0.0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //  
@@ -88,7 +93,7 @@ void motor (int ADCvalue)
     value           = ADCvalue - 128;
     if (value      >  0)
     {
-        digitalWritd (motorPin1, HIGH);
+        digitalWrite (motorPin1, HIGH);
         digitalWrite (motorPin2, LOW);
         fprintf (stdout, "[MOTOR] Turning Forward ...\n");
     }
