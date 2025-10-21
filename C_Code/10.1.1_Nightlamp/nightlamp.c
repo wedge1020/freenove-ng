@@ -2,7 +2,7 @@
 // Filename    : nightlamp.c
 // Description : Nightlamp - use photoresistor to control LED.
 //               Uses simplified C port of ADCDevice library.
-// Modification: 2025/09/28    
+// Modification: 2025/10/21
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

@@ -2,7 +2,7 @@
 // Filename    : joystick.c
 // Description : Read the Joystick
 //               Uses simplified C port of ADCDevice library.
-// Modification: 2025/10/21    
+// Modification: 2025/10/21
 //
 ////////////////////////////////////////////////////////////////////////////////////////
         

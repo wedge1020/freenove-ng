@@ -1,10 +1,10 @@
-/***
- *** Filename    : softlight.c
- *** Description : Use potentiometer to control LED
- ***               Uses simplified C port of ADCDevice library.
- *** Modification: 2025/09/28    
- ***
- **************************************************************************************/
+//
+// Filename    : softlight.c
+// Description : Use potentiometer to control LED
+//               Uses simplified C port of ADCDevice library.
+// Modification: 2025/10/21
+//
+////////////////////////////////////////////////////////////////////////////////////////
         
 #include <wiringPi.h>
 #include <softPwm.h>
@@ -12,6 +12,12 @@
 #include <ADCDevice.h>
 
 #define  ledPin 0
+
+////////////////////////////////////////////////////////////////////////////////////////
+//  
+// Declare Global ADCDevice variable
+//  
+ADCDevice *adc;
         
 int main (void)
 {       
