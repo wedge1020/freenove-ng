@@ -156,7 +156,7 @@ void motorStop (void)
     int index  = 0;
     for (index = 0; index < 4; index++)
     {
-        digitalWrite (motorPins[index], LOW);
+        digitalWrite (motor[index], LOW);
     }   
 }
 
