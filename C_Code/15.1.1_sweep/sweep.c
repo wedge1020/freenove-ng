@@ -1,8 +1,6 @@
 //
-// Filename    : sweep.c
-// Description : Servo sweep
-// Author      : www.freenove.com
-// modification: 2025/10/21
+// Filename   : sweep.c
+// Description: Servo sweep
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -10,11 +8,11 @@
 //
 // Preprocessor directives: include headers for wiringPi library, define symbols
 //
-#include <softPwm.h>
-#include <stdint.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>               // for C99 int32_t and int64_t types
 #include <wiringPi.h>
+#include <softPwm.h>
 
 #define OFFSET_MS    3            // unit of servo pulse offset: 0.1ms
 #define SERVO_MIN_MS 5+OFFSET_MS  // pulse duration for minimum angle of servo
@@ -38,7 +36,7 @@ int32_t  main (void)
     // Declare and initialize variables
     //
     int32_t  position     = 0;
-    
+
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Bring wiringPi functionality online
@@ -133,7 +131,7 @@ void  servoWrite (int32_t pin, int32_t angle)
     //
     // Bounds check: ensure we do not surpass minimum angle (reset to min)
     //
-    softPwmWrite (pin, map (angle, 0, 180, SERVO_MIN_MS, SERVO_MAX_MS));   
+    softPwmWrite (pin, map (angle, 0, 180, SERVO_MIN_MS, SERVO_MAX_MS));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////

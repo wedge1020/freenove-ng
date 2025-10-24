@@ -1,11 +1,14 @@
 //
-// Filename    : thermometer.c
-// Description : DIY Thermometer
-//               Uses simplified C port of ADCDevice library.
-// Modification: 2025/10/21
+// Filename   : thermometer.c
+// Description: DIY Thermometer
+//              Uses simplified C port of ADCDevice library.
 //
 ////////////////////////////////////////////////////////////////////////////////////////
- 
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// Pre-processor directives
+//
 #include <wiringPi.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,17 +16,17 @@
 #include <ADCDevice.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////
-//  
+//
 // Declare Global ADCDevice variable
-//  
+//
 ADCDevice *adc;
-        
+
 int main (void)
-{       
+{
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
+    //
     // Declare and initialize variables
-    //  
+    //
     int        adcValue  = 0;
     float      voltage   = 0.0;
     float      rt        = 0.0;
@@ -31,7 +34,7 @@ int main (void)
     float      tempC     = 0.0;
 
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
+    //
     // Initialize the ADCDevice library
     //
     adc                  = NULL;

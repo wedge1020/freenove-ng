@@ -1,8 +1,6 @@
 //
-// Filename    : steppingmotor.c
-// Description : Drive stepping Motor
-// Author      : www.freenove.com
-// Modification: 2025/10/23
+// Filename   : steppingmotor.c
+// Description: Drive stepping Motor
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -18,10 +16,63 @@
 //
 // Declare and initialize global variables related to motor and rotational motions
 //
-const int motor[]    = {   1,    4,    5,    6}; // phase ABCD of stepper motor 
-const int CCWStep[]  = {0x01, 0x02, 0x04, 0x08}; // coil rotation counter-clockwise 
+const int motor[]    = {   1,    4,    5,    6}; // phase ABCD of stepper motor
+const int CCWStep[]  = {0x01, 0x02, 0x04, 0x08}; // coil rotation counter-clockwise
 const int CWStep[]   = {0x08, 0x04, 0x02, 0x01}; // coil rotation clockwise
 // as for four phase stepping motor, four steps is a cycle. the function is used to drive the stepping motor clockwise or anticlockwise to take four steps
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// Function prototypes
+//
+void moveOnePeriod (int, int);
+void moveSteps     (int, int, int);
+void motorStop     (void);
+
+int main (void)
+{
+    int  index  = 0;
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Bring wiringPi functionality online
+    //
+    if (wiringPiSetup () == -1)
+    {
+        fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
+        exit (1);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Initialize all 4 pins of the motor to OUTPUT mode
+    //
+    for(index = 0; index < 4; index++)
+    {
+        pinMode (motor[index], OUTPUT);
+    }
+
+    fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
+
+    while (1)
+    {
+        ////////////////////////////////////////////////////////////////////////////////
+        //
+        // Rotate the motor 360 degrees clockwise (2048 steps, 512 cycles)
+        //
+        moveSteps (1, 3, 512);
+        delay (500);
+
+        ////////////////////////////////////////////////////////////////////////////////
+        //
+        // Rotate the motor 360 degrees counter-clockwise
+        //
+        moveSteps (0, 3, 512);
+        delay (500);
+    }
+
+    return (0);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -157,51 +208,5 @@ void motorStop (void)
     for (index = 0; index < 4; index++)
     {
         digitalWrite (motor[index], LOW);
-    }   
-}
-
-int main (void)
-{
-    int  index  = 0;
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Bring wiringPi functionality online
-    //
-    if (wiringPiSetup () == -1)
-    {
-        fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
-        exit (1);
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Initialize all 4 pins of the motor to OUTPUT mode
-    //
-    for(index = 0; index < 4; index++)
-    {
-        pinMode (motor[index], OUTPUT);
-    } 
-
-    fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
-
-    while (1)
-    {
-        ////////////////////////////////////////////////////////////////////////////////
-        //
-        // Rotate the motor 360 degrees clockwise (2048 steps, 512 cycles)
-        //
-        moveSteps (1, 3, 512);
-        delay (500);
-
-        ////////////////////////////////////////////////////////////////////////////////
-        //
-        // Rotate the motor 360 degrees counter-clockwise
-        //
-        moveSteps (0, 3, 512);
-        delay (500);
-    }
-
-    return (0);
 }
-

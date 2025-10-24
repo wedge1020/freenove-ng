@@ -1,8 +1,6 @@
 //
-// Filename    : alertor.c
-// Description : Make Alertor with buzzer and button.
-// Author      : www.freenove.com
-// modification: 2025/10/21
+// Filename   : alertor.c
+// Description: Make Alertor with buzzer and button.
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,39 +20,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
-// Generate an alert from the buzzer on indicated pin
+// Function prototypes for buzzer operation
 //
-void alertor (int pin)
-{
-    ////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Declare and initialize variables
-    //
-    int     x        = 0;
-    double  sinVal   = 0.0;
-    double  toneVal  = 0.0;
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Calculate and generate tone, utilizing the sine function
-    //
-    for (x = 0; x < 360; x++)
-    {
-        sinVal       = sin (x * (M_PI / 180)); // Calculate the sine value
-        toneVal      = 2000 + sinVal * 500;    // Add frequency, weighted sine value
-        softToneWrite (pin, toneVal);          // output corresponding PWM
-        delay (1);
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////
-//
-// Quiet the buzzer on indicated wiringPi GPIO pin
-//
-void stopAlertor (int pin)
-{
-    softToneWrite (pin,0);
-}
+void alertor     (int);
+void stopAlertor (int);
 
 int main (void)
 {
@@ -105,3 +74,40 @@ int main (void)
 
     return (0);
 }
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// Generate an alert from the buzzer on indicated pin
+//
+void alertor (int pin)
+{
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Declare and initialize variables
+    //
+    int     x        = 0;
+    double  sinVal   = 0.0;
+    double  toneVal  = 0.0;
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Calculate and generate tone, utilizing the sine function
+    //
+    for (x = 0; x < 360; x++)
+    {
+        sinVal       = sin (x * (M_PI / 180)); // Calculate the sine value
+        toneVal      = 2000 + sinVal * 500;    // Add frequency, weighted sine value
+        softToneWrite (pin, toneVal);          // output corresponding PWM
+        delay (1);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// Quiet the buzzer on indicated wiringPi GPIO pin
+//
+void stopAlertor (int pin)
+{
+    softToneWrite (pin,0);
+}
+

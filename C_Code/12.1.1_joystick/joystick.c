@@ -1,11 +1,14 @@
 //
-// Filename    : joystick.c
-// Description : Read the Joystick
-//               Uses simplified C port of ADCDevice library.
-// Modification: 2025/10/21
+// Filename   : joystick.c
+// Description: Read the Joystick
+//              Uses simplified C port of ADCDevice library.
 //
 ////////////////////////////////////////////////////////////////////////////////////////
-        
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// Declare Global ADCDevice variable
+//
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <stdio.h>
@@ -15,34 +18,34 @@
 #define  Z_Pin  1     // define pin for Z-axis
 
 ////////////////////////////////////////////////////////////////////////////////////////
-//  
+//
 // Declare Global ADCDevice variable
-//  
+//
 ADCDevice *adc;
-        
+
 int main (void)
-{       
+{
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
+    //
     // Declare and initialize variables
-    //  
+    //
     int  val_X     = 0;
     int  val_Y     = 0;
     int  val_Z     = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
+    //
     // Initialize the ADCDevice library
     //
     adc            = NULL;
     init_ADCDevice ();
 
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
+    //
     // Configure Z_Pin for input
     //
     pinMode (Z_Pin, INPUT);
-    pullUpDnControl (Z_Pin, PUD_UP);    
+    pullUpDnControl (Z_Pin, PUD_UP);
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
 

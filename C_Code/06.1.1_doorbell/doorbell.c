@@ -1,8 +1,6 @@
 //
-// Filename    : doorbell.c
-// Description : Make doorbell with buzzer and button.
-// Author      : www.freenove.com
-// modification: 2025/10/21
+// Filename   : doorbell.c
+// Description: Make doorbell with buzzer and button.
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,7 +32,7 @@ int main (void)
     // Set pin modes for involved wiringPi GPIO pins, and configure button
     //
     pinMode (buttonPin, INPUT);
-    pinMode (buzzerPin, OUTPUT); 
+    pinMode (buzzerPin, OUTPUT);
     pullUpDnControl (buttonPin, PUD_UP);  // pull up to HIGH level
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");

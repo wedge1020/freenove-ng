@@ -1,8 +1,6 @@
 //
-// Filename    : relay.c
-// Description : Control Motor with Button and Relay 
-// Author      : www.freenove.com
-// modification: 2025/10/21
+// Filename   : relay.c
+// Description: Control Motor with Button and Relay
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,7 +44,7 @@ int main (void)
     //
     // Configure button and relay
     //
-    pinMode (relayPin, OUTPUT); 
+    pinMode (relayPin, OUTPUT);
     pinMode (buttonPin, INPUT);
     pullUpDnControl (buttonPin, PUD_UP); // pull up to high level
 

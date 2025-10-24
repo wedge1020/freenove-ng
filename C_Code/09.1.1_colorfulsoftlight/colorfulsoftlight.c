@@ -1,38 +1,41 @@
 //
-// Filename    : colorfulsoftlight.c
-// Description : Use ADC module to read the voltage value of potentiometer.
-//               Uses simplified C port of ADCDevice library.
-// Modification: 2025/10/21
+// Filename   : colorfulsoftlight.c
+// Description: Use ADC module to read the voltage value of potentiometer.
+//              Uses simplified C port of ADCDevice library.
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// Pre-processor directives
+//
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <stdio.h>
 #include <ADCDevice.h>
-        
+
 #define  REDLED   3     // define 3 pins for RGBLED, set to wiringpi pin #'s
 #define  GRNLED   2
 #define  BLULED   0
 
 ////////////////////////////////////////////////////////////////////////////////////////
-//  
+//
 // Declare Global ADCDevice variable
-//  
+//
 ADCDevice *adc;
 
 int main (void)
-{       
+{
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
+    //
     // Declare and initialize variables
-    //  
-    int  redval    = 0; 
+    //
+    int  redval    = 0;
     int  grnval    = 0;
     int  bluval    = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
+    //
     // Initialize the ADCDevice library
     //
     adc            = NULL;

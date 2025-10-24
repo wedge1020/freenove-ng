@@ -1,11 +1,14 @@
 //
-// Filename    : motor.c
-// Description : Motor - control the motor
-//               Uses simplified C port of ADCDevice library.
-// Modification: 2025/10/21
+// Filename   : motor.c
+// Description: Motor - control the motor
+//              Uses simplified C port of ADCDevice library.
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// Pre-processor directives
+//
 #include <math.h>
 #include <softPwm.h>
 #include <stdint.h>          // for C99 int32_t and int64_t types
@@ -23,7 +26,7 @@
 // Global ADCDevice variable
 //
 ADCDevice *adc;
-        
+
 ////////////////////////////////////////////////////////////////////////////////////////
 //
 // Function prototypes
@@ -32,23 +35,23 @@ int64_t  map   (int64_t, int64_t, int64_t, int64_t, int64_t);
 void     motor (int32_t);
 
 int32_t main (void)
-{       
+{
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
+    //
     // Declare and initialize variables
-    //  
+    //
     int32_t  value       = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
+    //
     // Initialize the ADCDevice library
     //
     adc                  = NULL;
     init_ADCDevice ();
 
     ////////////////////////////////////////////////////////////////////////////////////
-    //  
-    // Set pin modes and create a software PWM pin 
+    //
+    // Set pin modes and create a software PWM pin
     //
     pinMode (enablePin, OUTPUT);
     pinMode (motorPin1, OUTPUT);
@@ -85,7 +88,7 @@ int64_t map (int64_t value,    int64_t fromLow,
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
-// Motor function: determine the direction and speed of the motor according to the ADC 
+// Motor function: determine the direction and speed of the motor according to the ADC
 //
 void motor (int32_t ADCvalue)
 {
@@ -106,7 +109,7 @@ void motor (int32_t ADCvalue)
     }
     else
     {
-        digitalWrite (motorPin1, LOW); 
+        digitalWrite (motorPin1, LOW);
         digitalWrite (motorPin2, LOW);
         fprintf (stdout, "[MOTOR] Stopped.\n");
     }
