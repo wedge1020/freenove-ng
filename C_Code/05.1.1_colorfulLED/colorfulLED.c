@@ -27,6 +27,10 @@ void LEDsetcolor (int32_t, int32_t, int32_t);
 
 int32_t  main (void)
 {
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Declare and initialize variables
+    //
     int32_t  red          = 0;
     int32_t  green        = 0;
     int32_t  blue         = 0;
