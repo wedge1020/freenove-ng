@@ -15,15 +15,15 @@
 #include <wiringPi.h>
 #include <wiringShift.h>
 
-#define  dataPin   0   // DS Pin of 74HC595 (Pin14)
-#define  latchPin  2   // ST_CP Pin of 74HC595 (Pin12)
-#define  clockPin  3   // CH_CP Pin of 74HC595 (Pin11)
+#define  DATApin   0   // DS Pin of 74HC595 (Pin14)
+#define  LATCHpin  2   // ST_CP Pin of 74HC595 (Pin12)
+#define  CLOCKpin  3   // CH_CP Pin of 74HC595 (Pin11)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
 // Function prototypes
 //
-void _shiftOut (int32_t, int32_t, int32_t, int32_t);
+void shiftout (int32_t, int32_t, int32_t, int32_t);
 
 int32_t  main (void)
 {
@@ -48,9 +48,9 @@ int32_t  main (void)
     //
     // Initialize 74HC595 pins for operation
     //
-    pinMode (dataPin,  OUTPUT);
-    pinMode (latchPin, OUTPUT);
-    pinMode (clockPin, OUTPUT);
+    pinMode (DATApin,  OUTPUT);
+    pinMode (LATCHpin, OUTPUT);
+    pinMode (CLOCKpin, OUTPUT);
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
 
@@ -59,9 +59,9 @@ int32_t  main (void)
         x                 = 0x01;
         for (index = 0; index < 8; index++)
         {
-            digitalWrite (latchPin, LOW);               // Output low level to latchPin
-            _shiftOut (dataPin, clockPin, LSBFIRST, x); // Send serial data to 74HC595
-            digitalWrite (latchPin, HIGH);              // Output high level to latchPin, and 74HC595 will update the data to the parallel output port.
+            digitalWrite (LATCHpin, LOW);               // Output low level to LATCHpin
+            shiftout (DATApin, CLOCKpin, LSBFIRST, x); // Send serial data to 74HC595
+            digitalWrite (LATCHpin, HIGH);              // Output high level to LATCHpin, and 74HC595 will update the data to the parallel output port.
             x             = x << 1;                     // make the variable move one bit to left once, then the bright LED move one step to the left once.
             delay (100);
         }
@@ -69,9 +69,9 @@ int32_t  main (void)
         x                 = 0x80;
         for (index = 0; index < 8; index++)
         {
-            digitalWrite (latchPin, LOW);
-            _shiftOut (dataPin, clockPin, LSBFIRST, x);
-            digitalWrite (latchPin, HIGH);
+            digitalWrite (LATCHpin, LOW);
+            shiftout (DATApin, CLOCKpin, LSBFIRST, x);
+            digitalWrite (LATCHpin, HIGH);
             x             = x >> 1;
             delay (100);
         }
@@ -82,9 +82,9 @@ int32_t  main (void)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
-// _shiftOut(): push the data out in the intended order
+// shiftout(): push the data out in the intended order
 //
-void _shiftOut (int32_t dPin, int32_t cPin, int32_t order, int32_t val)
+void shiftout (int32_t  dPin, int32_t  cPin, int32_t  order, int32_t  val)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //

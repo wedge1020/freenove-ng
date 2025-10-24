@@ -1,6 +1,6 @@
 //
-// Filename    : SevenSegmentDisplay.c
-// Description : Control SevenSegmentDisplay by 74HC595
+// Filename   : 7segmentdisplay.c
+// Description: Control SevenSegmentDisplay by 74HC595
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,7 +22,7 @@
 //
 // Function prototypes
 //
-void _shiftOut (int32_t, int32_t, int32_t, int32_t);
+void shiftout (int32_t, int32_t, int32_t, int32_t);
 
 int32_t main (void)
 {
@@ -68,7 +68,7 @@ int32_t main (void)
             // Output the values in num[]
             //
             digitalWrite (LATCHpin, LOW);
-            _shiftOut (DATApin, CLOCKpin, MSBFIRST, num[index]);
+            shiftout (DATApin, CLOCKpin, MSBFIRST, num[index]);
             digitalWrite (LATCHpin, HIGH);
             delay (500);
         }
@@ -80,7 +80,7 @@ int32_t main (void)
             // Display the decimal point
             //
             digitalWrite (LATCHpin, LOW);
-            _shiftOut (DATApin, CLOCKpin, MSBFIRST, num[index] & 0x7f);
+            shiftout (DATApin, CLOCKpin, MSBFIRST, num[index] & 0x7f);
             digitalWrite (LATCHpin, HIGH);
             delay (500);
         }
@@ -90,9 +90,9 @@ int32_t main (void)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
-// _shiftOut(): push the data out in the intended order
+// shiftout(): push the data out in the intended order
 //
-void _shiftOut (int32_t dPin, int32_t cPin, int32_t order, int32_t val)
+void shiftout (int32_t  dPin, int32_t  cPin, int32_t  order, int32_t  val)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //

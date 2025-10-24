@@ -16,22 +16,25 @@
 //
 // Declare and initialize global variables related to motor and rotational motions
 //
-const int motor[]    = {   1,    4,    5,    6}; // phase ABCD of stepper motor
-const int CCWStep[]  = {0x01, 0x02, 0x04, 0x08}; // coil rotation counter-clockwise
-const int CWStep[]   = {0x08, 0x04, 0x02, 0x01}; // coil rotation clockwise
-// as for four phase stepping motor, four steps is a cycle. the function is used to drive the stepping motor clockwise or anticlockwise to take four steps
+int32_t motor[]    = {   1,    4,    5,    6}; // phase ABCD of stepper motor
+int32_t CCWStep[]  = {0x01, 0x02, 0x04, 0x08}; // coil rotation counter-clockwise
+int32_t CWStep[]   = {0x08, 0x04, 0x02, 0x01}; // coil rotation clockwise
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
 // Function prototypes
 //
-void moveOnePeriod (int, int);
-void moveSteps     (int, int, int);
+void moveOnePeriod (int32_t, int32_t);
+void moveSteps     (int32_t, int32_t, int32_t);
 void motorStop     (void);
 
-int main (void)
+int32_t main (void)
 {
-    int  index  = 0;
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Declare and initialize local variables
+    //
+    int32_t  index        = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
@@ -79,16 +82,16 @@ int main (void)
 // moveOnePeriod(): drive the stepper motor (a four phase motor) one full rotation
 //                  (the for steps as established)
 //
-void moveOnePeriod (int direction, int ms)
+void moveOnePeriod (int32_t  direction, int32_t  ms)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Declare and initialize iteration variables
     //
-    int phase                       = 0;
-    int pin                         = 0;
-    int position                    = 0;
-    int value                       = 0;
+    int32_t phase                   = 0;
+    int32_t pin                     = 0;
+    int32_t position                = 0;
+    int32_t value                   = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
@@ -189,9 +192,9 @@ void moveOnePeriod (int direction, int ms)
 //
 // moveSteps(): rotate in direction, with indicated delay (in mS), cycles times
 //
-void moveSteps (int direction, int ms, int cycles)
+void moveSteps (int32_t  direction, int32_t  ms, int32_t  cycles)
 {
-    int index  = 0;
+    int32_t index  = 0;
     for (index = 0; index < cycles; index++)
     {
         moveOnePeriod (direction, ms);
@@ -204,7 +207,7 @@ void moveSteps (int direction, int ms, int cycles)
 //
 void motorStop (void)
 {
-    int index  = 0;
+    int32_t index  = 0;
     for (index = 0; index < 4; index++)
     {
         digitalWrite (motor[index], LOW);
