@@ -70,8 +70,8 @@ int32_t main (void)
     //
     for (index = 0; index < 4; index++)
     {
-        pinMode (digitPin[i], OUTPUT);
-        digitalWrite (digitPin[i], HIGH);
+        pinMode (digitPin[index], OUTPUT);
+        digitalWrite (digitPin[index], HIGH);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////

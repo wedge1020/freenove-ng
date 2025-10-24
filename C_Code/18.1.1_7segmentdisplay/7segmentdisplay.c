@@ -61,7 +61,7 @@ int32_t main (void)
 
     while (1)
     {
-        for (index = 0; i < sizeof (num); i++)
+        for (index = 0; index < sizeof (num); index++)
         {
             ////////////////////////////////////////////////////////////////////////////
             //
