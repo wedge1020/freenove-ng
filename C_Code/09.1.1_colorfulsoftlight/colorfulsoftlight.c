@@ -24,7 +24,7 @@
 //
 // Declare Global ADCDevice variable
 //
-ADCDevice *adc;
+ADCDevice   *adc;
 
 int32_t  main (void)
 {

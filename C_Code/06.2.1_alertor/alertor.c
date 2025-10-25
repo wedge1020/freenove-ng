@@ -1,37 +1,39 @@
 //
 // Filename   : alertor.c
-// Description: Make Alertor with buzzer and button.
+// Description: Make Alertor with BUZZER and BUTTON
+// Components : BUTTON, BUZZER
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
-// Preprocessor directives: include header files for wiringPi and math libraries,
+// Pre-processor directives: include header files for wiringPi and math libraries,
 // define symbols for easier reference to our utilized wiringPi GPIOs
 //
 #include <math.h>
 #include <softTone.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <wiringPi.h>
 
-#define  buttonPin     1      // define the buttonPin
-#define  buzzerPin     0      // define the buzzerPin
+#define  BUTTONpin     1      // define the BUTTONpin
+#define  BUZZERpin     0      // define the BUZZERpin
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
 // Function prototypes for buzzer operation
 //
-void alertor     (int);
-void stopAlertor (int);
+void     alertor     (int32_t);
+void     stopAlertor (int32_t);
 
-int main (void)
+int32_t  main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Bring wiringPi functionality online
     //
-    if (wiringPiSetup () == -1)
+    if (wiringPiSetup ()            == -1)
     {
         fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
         exit (1);
@@ -41,10 +43,10 @@ int main (void)
     //
     // Set pin modes for involved wiringPi GPIO pins, and configure button and buzzer
     //
-    pinMode (buttonPin, INPUT);
-    pinMode (buzzerPin, OUTPUT);
-    softToneCreate (buzzerPin);           // set buzzerPin for tone generation
-    pullUpDnControl (buttonPin, PUD_UP);  // pull up to HIGH level
+    pinMode (BUTTONpin, INPUT);
+    pinMode (BUZZERpin, OUTPUT);
+    softToneCreate (BUZZERpin);           // set BUZZERpin for tone generation
+    pullUpDnControl (BUTTONpin, PUD_UP);  // pull up to HIGH level
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
     fprintf (stdout, "[ALERTOR] turned OFF");
@@ -55,9 +57,9 @@ int main (void)
         //
         // Button is pressed, generate alert using buzzer
         //
-        if (digitalRead (buttonPin) == LOW)
+        if (digitalRead (BUTTONpin) == LOW)
         {
-            alertor (buzzerPin);
+            alertor (BUZZERpin);
             fprintf (stdout, "\b\b\bON ");
         }
 
@@ -67,7 +69,7 @@ int main (void)
         //
         else
         {
-            stopAlertor (buzzerPin);
+            stopAlertor (BUZZERpin);
             fprintf (stdout, "\b\b\bOFF");
         }
     }
@@ -79,15 +81,15 @@ int main (void)
 //
 // Generate an alert from the buzzer on indicated pin
 //
-void alertor (int pin)
+void alertor (int32_t  pin)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Declare and initialize variables
     //
-    int     x        = 0;
-    double  sinVal   = 0.0;
-    double  toneVal  = 0.0;
+    int32_t  x        = 0;
+    double   sinVal   = 0.0;
+    double   toneVal  = 0.0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
@@ -95,8 +97,8 @@ void alertor (int pin)
     //
     for (x = 0; x < 360; x++)
     {
-        sinVal       = sin (x * (M_PI / 180)); // Calculate the sine value
-        toneVal      = 2000 + sinVal * 500;    // Add frequency, weighted sine value
+        sinVal        = sin (x * (M_PI / 180)); // Calculate the sine value
+        toneVal       = 2000 + sinVal * 500;    // Add frequency, weighted sine value
         softToneWrite (pin, toneVal);          // output corresponding PWM
         delay (1);
     }
@@ -106,8 +108,7 @@ void alertor (int pin)
 //
 // Quiet the buzzer on indicated wiringPi GPIO pin
 //
-void stopAlertor (int pin)
+void stopAlertor (int32_t  pin)
 {
-    softToneWrite (pin,0);
+    softToneWrite (pin, 0);
 }
-

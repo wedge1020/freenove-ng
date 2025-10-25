@@ -1,6 +1,7 @@
 //
 // Filename   : doorbell.c
 // Description: Make doorbell with buzzer and button.
+// Components : BUZZER, BUTTON
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -9,13 +10,14 @@
 // Preprocessor directives: include wiringPi, define symbols
 //
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <wiringPi.h>
 
-#define  buttonPin 1    // define the buttonPin
-#define  buzzerPin 0    // define the buzzerPin
+#define  BUTTONpin 1    // define the BUTTONpin
+#define  BUZZERpin 0    // define the BUZZERpin
 
-int main (void)
+int32_t  main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
@@ -31,9 +33,9 @@ int main (void)
     //
     // Set pin modes for involved wiringPi GPIO pins, and configure button
     //
-    pinMode (buttonPin, INPUT);
-    pinMode (buzzerPin, OUTPUT);
-    pullUpDnControl (buttonPin, PUD_UP);  // pull up to HIGH level
+    pinMode (BUTTONpin, INPUT);
+    pinMode (BUZZERpin, OUTPUT);
+    pullUpDnControl (BUTTONpin, PUD_UP);  // pull up to HIGH level
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
     fprintf (stdout, "[BUZZER] turned OFF");
@@ -44,9 +46,9 @@ int main (void)
         //
         // Button is pressed, turn on buzzer
         //
-        if (digitalRead (buttonPin) == LOW)
+        if (digitalRead (BUTTONpin) == LOW)
         {
-            digitalWrite (buzzerPin, HIGH);
+            digitalWrite (BUZZERpin, HIGH);
             fprintf (stdout, "\b\b\bON ");
         }
 
@@ -56,7 +58,7 @@ int main (void)
         //
         else
         {
-            digitalWrite (buzzerPin, LOW);
+            digitalWrite (BUZZERpin, LOW);
             fprintf (stdout, "\b\b\bOFF");
         }
     }

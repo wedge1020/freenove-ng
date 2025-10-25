@@ -2,27 +2,29 @@
 // Filename   : ADC.c
 // Description: Use ADC module to read the voltage value of potentiometer.
 //              Uses simplified C port of ADCDevice library.
+// Components : ADC module, potentiometer
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
 #include <wiringPi.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <ADCDevice.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
 // Declare Global ADCDevice variable
 //
-ADCDevice *adc;
+ADCDevice   *adc;
 
-int main (void)
+int32_t  main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Declare and initialize variables
     //
-    int        adcValue  = 0;
-    float      voltage   = 0.0;
+    int32_t  adcValue    = 0;
+    float    voltage     = 0.0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
