@@ -1,6 +1,7 @@
 //
 // Filename   : LEDmatrix.c
 // Description: Control LEDmatrix by 74HC595
+// Components : 74HC595, LEDmatrix
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,12 +18,6 @@
 #define  DATApin   0    // DS Pin of 74HC595 (Pin14)
 #define  LATCHpin  2    // ST_CP Pin of 74HC595 (Pin12)
 #define  CLOCKpin  3    // SH_CP Pin of 74HC595 (Pin11)
-
-////////////////////////////////////////////////////////////////////////////////////////
-//
-// function prototypes
-//
-void shiftout (int32_t, int32_t, int32_t, int32_t);
 
 int32_t  main (void)
 {
@@ -101,13 +96,13 @@ int32_t  main (void)
                 //
                 // first shift data of line information to the first stage 74HC595
                 //
-                shiftout (DATApin, CLOCKpin, MSBFIRST, picture[index]);
+                shiftOut (DATApin, CLOCKpin, MSBFIRST, picture[index]);
 
                 ////////////////////////////////////////////////////////////////////////
                 //
                 // ... then shift column information to the second stage 74HC595
                 //
-                shiftout (DATApin, CLOCKpin, MSBFIRST, ~column);
+                shiftOut (DATApin, CLOCKpin, MSBFIRST, ~column);
 
                 ////////////////////////////////////////////////////////////////////////
                 //
@@ -145,8 +140,8 @@ int32_t  main (void)
                 for (index = k; index < 8 + k; index++)
                 {
                     digitalWrite (LATCHpin, LOW);
-                    shiftout (DATApin, CLOCKpin, MSBFIRST, data[index]);
-                    shiftout (DATApin, CLOCKpin, MSBFIRST,~column);
+                    shiftOut (DATApin, CLOCKpin, MSBFIRST, data[index]);
+                    shiftOut (DATApin, CLOCKpin, MSBFIRST,~column);
                     digitalWrite (LATCHpin, HIGH);
                     column  = column >> 1;
                     delay (1);
@@ -156,81 +151,4 @@ int32_t  main (void)
     }
 
     return (0);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////
-//
-// shiftout(): push the data out in the intended order
-//
-void shiftout (int32_t  dPin, int32_t  cPin, int32_t  order, int32_t  val)
-{
-    ////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Declare and initialize local variables
-    //
-    int32_t  bit       = 0;
-    int32_t  state     = 0;
-    int32_t  value     = 0;
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    //
-    // 8 bits in the transactional byte, process for each
-    //
-    for (bit = 0; bit < 8; bit++)
-    {
-        ////////////////////////////////////////////////////////////////////////////////
-        //
-        // LSB is first
-        //
-        if (order     == LSBFIRST)
-        {
-            ////////////////////////////////////////////////////////////////////////////
-            //
-            // Determine the state (HIGH or LOW) we will be writing for this bit of
-            // the byte transaction
-            //
-            value      = 0x01 & (val >> bit);
-            if (value == 0x01)
-            {
-                state  = HIGH;
-            }
-            else
-            {
-                state  = LOW;
-            }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////
-        //
-        // MSB is first
-        //
-        else
-        {
-            ////////////////////////////////////////////////////////////////////////////
-            //
-            // Determine the state (HIGH or LOW) we will be writing for this bit of
-            // the byte transaction
-            //
-            value      = 0x80 & (val << bit);
-            if (value == 0x80)
-            {
-                state  = HIGH;
-            }
-            else
-            {
-                state  = LOW;
-            }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////
-        //
-        // Perform the transaction (write the desired `state` to the bus, as
-        // determined from byte order logic above
-        //
-        digitalWrite (cPin, LOW);
-        digitalWrite (dPin, state);
-        delayMicroseconds (10);
-        digitalWrite (cPin, HIGH);
-        delayMicroseconds (10);
-    }
 }

@@ -1,6 +1,7 @@
 //
 // Filename   : 7segmentdisplay.c
 // Description: Control SevenSegmentDisplay by 74HC595
+// Components : 74HC595, 7 segment display
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,12 +18,6 @@
 #define  DATApin   0    // DS Pin of 74HC595 (Pin14)
 #define  LATCHpin  2    // ST_CP Pin of 74HC595 (Pin12)
 #define  CLOCKpin  3    // CH_CP Pin of 74HC595 (Pin11)
-
-////////////////////////////////////////////////////////////////////////////////////////
-//
-// Function prototypes
-//
-void shiftout (int32_t, int32_t, int32_t, int32_t);
 
 int32_t main (void)
 {
@@ -68,7 +63,7 @@ int32_t main (void)
             // Output the values in num[]
             //
             digitalWrite (LATCHpin, LOW);
-            shiftout (DATApin, CLOCKpin, MSBFIRST, num[index]);
+            shiftOut (DATApin, CLOCKpin, MSBFIRST, num[index]);
             digitalWrite (LATCHpin, HIGH);
             delay (500);
         }
@@ -80,87 +75,10 @@ int32_t main (void)
             // Display the decimal point
             //
             digitalWrite (LATCHpin, LOW);
-            shiftout (DATApin, CLOCKpin, MSBFIRST, num[index] & 0x7f);
+            shiftOut (DATApin, CLOCKpin, MSBFIRST, num[index] & 0x7f);
             digitalWrite (LATCHpin, HIGH);
             delay (500);
         }
     }
     return (0);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////
-//
-// shiftout(): push the data out in the intended order
-//
-void shiftout (int32_t  dPin, int32_t  cPin, int32_t  order, int32_t  val)
-{
-    ////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Declare and initialize local variables
-    //
-    int32_t  bit       = 0;
-    int32_t  state     = 0;
-    int32_t  value     = 0;
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    //
-    // 8 bits in the transactional byte, process for each
-    //
-    for (bit = 0; bit < 8; bit++)
-    {
-        ////////////////////////////////////////////////////////////////////////////////
-        //
-        // LSB is first
-        //
-        if (order     == LSBFIRST)
-        {
-            ////////////////////////////////////////////////////////////////////////////
-            //
-            // Determine the state (HIGH or LOW) we will be writing for this bit of
-            // the byte transaction
-            //
-            value      = 0x01 & (val >> bit);
-            if (value == 0x01)
-            {
-                state  = HIGH;
-            }
-            else
-            {
-                state  = LOW;
-            }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////
-        //
-        // MSB is first
-        //
-        else
-        {
-            ////////////////////////////////////////////////////////////////////////////
-            //
-            // Determine the state (HIGH or LOW) we will be writing for this bit of
-            // the byte transaction
-            //
-            value      = 0x80 & (val << bit);
-            if (value == 0x80)
-            {
-                state  = HIGH;
-            }
-            else
-            {
-                state  = LOW;
-            }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////
-        //
-        // Perform the transaction (write the desired `state` to the bus, as
-        // determined from byte order logic above
-        //
-        digitalWrite (cPin, LOW);
-        digitalWrite (dPin, state);
-        delayMicroseconds (10);
-        digitalWrite (cPin, HIGH);
-        delayMicroseconds (10);
-    }
 }
