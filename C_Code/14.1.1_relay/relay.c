@@ -9,14 +9,14 @@
 // Preprocessor directives: include headers and define symbols
 //
 #include <wiringPi.h>
-#include <stdint.h>                      // for C99 int32_t and int64_t types
 #include <stdio.h>
+#include <stdint.h>                      // for C99 int32_t and int64_t types
 #include <stdlib.h>
 
 #define  relayPin  0                     // define the relayPin
 #define  buttonPin 1                     // define the buttonPin
 
-int main (void)
+int32_t  main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //

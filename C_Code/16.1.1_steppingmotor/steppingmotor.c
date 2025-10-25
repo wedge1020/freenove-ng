@@ -9,6 +9,7 @@
 // Preprocessor directives
 //
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <wiringPi.h>
 
@@ -16,9 +17,9 @@
 //
 // Declare and initialize global variables related to motor and rotational motions
 //
-int32_t motor[]    = {   1,    4,    5,    6}; // phase ABCD of stepper motor
-int32_t CCWStep[]  = {0x01, 0x02, 0x04, 0x08}; // coil rotation counter-clockwise
-int32_t CWStep[]   = {0x08, 0x04, 0x02, 0x01}; // coil rotation clockwise
+int32_t motor[]    = {    1,    4,    5,    6 }; // phase ABCD of stepper motor
+int32_t CCWStep[]  = { 0x01, 0x02, 0x04, 0x08 }; // coil rotation counter-clockwise
+int32_t CWStep[]   = { 0x08, 0x04, 0x02, 0x01 }; // coil rotation clockwise
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //

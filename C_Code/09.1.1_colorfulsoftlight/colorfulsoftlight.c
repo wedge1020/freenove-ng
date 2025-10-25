@@ -12,6 +12,8 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include <ADCDevice.h>
 
 #define  REDLED   3     // define 3 pins for RGBLED, set to wiringpi pin #'s
@@ -24,21 +26,21 @@
 //
 ADCDevice *adc;
 
-int main (void)
+int32_t  main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Declare and initialize variables
     //
-    int  redval    = 0;
-    int  grnval    = 0;
-    int  bluval    = 0;
+    int32_t  redval  = 0;
+    int32_t  grnval  = 0;
+    int32_t  bluval  = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Initialize the ADCDevice library
     //
-    adc            = NULL;
+    adc              = NULL;
     init_ADCDevice ();
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -61,9 +63,9 @@ int main (void)
         //
         // Read analog value of 3 potentiometers
         //
-        redval     = adc -> analogRead (0);
-        grnval     = adc -> analogRead (1);
-        bluval     = adc -> analogRead (2);
+        redval       = adc -> analogRead (0);
+        grnval       = adc -> analogRead (1);
+        bluval       = adc -> analogRead (2);
 
         ////////////////////////////////////////////////////////////////////////////////
         //

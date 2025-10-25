@@ -11,8 +11,8 @@
 //
 #include <math.h>
 #include <softPwm.h>
-#include <stdint.h>          // for C99 int32_t and int64_t types
 #include <stdio.h>
+#include <stdint.h>          // for C99 int32_t and int64_t types
 #include <stdlib.h>
 #include <wiringPi.h>
 #include <ADCDevice.h>
@@ -79,8 +79,7 @@ int32_t main (void)
 //
 // Map function: map the value from a range to another range.
 //
-int64_t map (int64_t value,    int64_t fromLow,
-             int64_t fromHigh, int64_t toLow,
+int64_t map (int64_t value,    int64_t fromLow, int64_t fromHigh, int64_t toLow,
              int64_t toHigh)
 {
     return ((toHigh - toLow) * (value - fromLow) / (fromHigh - fromLow) + toLow);
@@ -92,21 +91,55 @@ int64_t map (int64_t value,    int64_t fromLow,
 //
 void motor (int32_t ADCvalue)
 {
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Declare local variable
+    //
     int32_t  value  = 0;
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Based on the resultant value stored in `value`, determine action for motor:
+    //
+    // * greater than 0: turn forward
+    // * less than 0: turn backward
+    // * equal to 0: stop
+    //
+    ////////////////////////////////////////////////////////////////////////////////////
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // `value` stores an ADC-provided value (0-255) adjusted to straddle the
+    // zero position; its effective range will be: -128 through +127
+    //
     value           = ADCvalue - 128;
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // An ADC adjusted value greater than 0 will turn the motor forward ...
+    //
     if (value      >  0)
     {
         digitalWrite (motorPin1, HIGH);
         digitalWrite (motorPin2, LOW);
         fprintf (stdout, "[MOTOR] Turning Forward ...\n");
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // ... and ADC adjusted value less than 0 will turn the motor backward ...
+    //
     else if (value <  0)
     {
         digitalWrite (motorPin1, LOW);
         digitalWrite (motorPin2, HIGH);
         fprintf (stdout, "[MOTOR] Turning Backward ...\n");
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // ... whereas a value of 0 will be associated with stopping the motor
+    //
     else
     {
         digitalWrite (motorPin1, LOW);
@@ -114,6 +147,11 @@ void motor (int32_t ADCvalue)
         fprintf (stdout, "[MOTOR] Stopped.\n");
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Regardless of the direction, the magnitude of the value is written, determining
+    // the overall motor speed (0-128), mapped to our software PWM levels of 0-100
+    //
     softPwmWrite (enablePin, map (abs (value), 0, 128, 0, 100));
     fprintf (stdout, "The PWM duty cycle is: %d%%\n", abs (value) * 100 / 127);
 }

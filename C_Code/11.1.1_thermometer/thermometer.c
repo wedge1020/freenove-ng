@@ -11,6 +11,7 @@
 //
 #include <wiringPi.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <math.h>
 #include <ADCDevice.h>
@@ -21,13 +22,13 @@
 //
 ADCDevice *adc;
 
-int main (void)
+int32_t  main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Declare and initialize variables
     //
-    int        adcValue  = 0;
+    int32_t    adcValue  = 0;
     float      voltage   = 0.0;
     float      rt        = 0.0;
     float      tempK     = 0.0;

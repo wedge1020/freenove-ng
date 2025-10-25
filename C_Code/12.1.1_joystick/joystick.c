@@ -12,6 +12,7 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <ADCDevice.h>
 
@@ -23,21 +24,21 @@
 //
 ADCDevice *adc;
 
-int main (void)
+int32_t  main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Declare and initialize variables
     //
-    int  val_X     = 0;
-    int  val_Y     = 0;
-    int  val_Z     = 0;
+    int32_t  val_X  = 0;
+    int32_t  val_Y  = 0;
+    int32_t  val_Z  = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Initialize the ADCDevice library
     //
-    adc            = NULL;
+    adc             = NULL;
     init_ADCDevice ();
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -59,10 +60,14 @@ int main (void)
         //
         // Read joystick values
         //
-        val_X      = adc -> analogRead (1); // read analog X-axis value
-        val_Y      = adc -> analogRead (0); // read analog Y-axis value
-        val_Z      = digitalRead (Z_Pin);   // read digital Z-axis value
+        val_X       = adc -> analogRead (1); // read analog X-axis value
+        val_Y       = adc -> analogRead (0); // read analog Y-axis value
+        val_Z       = digitalRead (Z_Pin);   // read digital Z-axis value
 
+        ////////////////////////////////////////////////////////////////////////////////
+        //
+        // Display current joystick values
+        //
         fprintf (stdout, "X: %3d, Y: %3d, Z: %d\n", val_X, val_Y, val_Z);
         delay (100);
     }

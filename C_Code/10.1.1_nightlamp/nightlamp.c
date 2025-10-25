@@ -12,6 +12,8 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include <ADCDevice.h>
 
 #define  ledPin 0
@@ -22,13 +24,13 @@
 //
 ADCDevice *adc;
 
-int main (void)
+int32_t  main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Declare and initialize variables
     //
-    int        adcValue  = 0;
+    int32_t    adcValue  = 0;
     float      voltage   = 0.0;
 
     ////////////////////////////////////////////////////////////////////////////////////
