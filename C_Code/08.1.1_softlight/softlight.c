@@ -2,6 +2,7 @@
 // Filename   : softlight.c
 // Description: Use potentiometer to control LED
 //              Uses simplified C port of ADCDevice library.
+// Components : ADC module, potentiometer, LED
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -12,24 +13,25 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <ADCDevice.h>
 
-#define  ledPin 0
+#define  LEDpin 0
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
 // Declare Global ADCDevice variable
 //
-ADCDevice *adc;
+ADCDevice   *adc;
 
-int main (void)
+int32_t  main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Declare and initialize variables
     //
-    int        adcValue  = 0;
-    float      voltage   = 0.0;
+    int32_t  ADCvalue    = 0;
+    float    voltage     = 0.0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
@@ -42,7 +44,7 @@ int main (void)
     //
     // Create software PWM control for LED
     //
-    softPwmCreate (ledPin, 0, 100);
+    softPwmCreate (LEDpin, 0, 100);
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
 
@@ -52,10 +54,10 @@ int main (void)
     //
     while (1)
     {
-        adcValue         = adc -> analogRead (0);          // read value of A0 pin
-        softPwmWrite (ledPin, adcValue * 100 / 255);       // Mapping to PWM duty cycle
-        voltage          = (float) adcValue / 255.0 * 3.3; // Calculate voltage
-        fprintf (stdout, "ADC value: %3d, Voltage:   %.2fV\n", adcValue, voltage);
+        ADCvalue         = adc -> analogRead (0);          // read value of A0 pin
+        softPwmWrite (LEDpin, ADCvalue * 100 / 255);       // Mapping to PWM duty cycle
+        voltage          = (float) ADCvalue / 255.0 * 3.3; // Calculate voltage
+        fprintf (stdout, "ADC value: %3d, Voltage:   %.2fV\n", ADCvalue, voltage);
         delay (30);
     }
 

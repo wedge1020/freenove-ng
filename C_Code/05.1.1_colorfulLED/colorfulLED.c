@@ -1,6 +1,7 @@
 //
 // Filename   : colorfulLED.c
 // Description: Random color change on RGB LED
+// Components : RGB LED
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,8 +23,8 @@
 //
 // Function prototypes
 //
-void LEDsetup    (void);
-void LEDsetcolor (int32_t, int32_t, int32_t);
+void     LEDsetup    (void);
+void     LEDsetcolor (int32_t, int32_t, int32_t);
 
 int32_t  main (void)
 {

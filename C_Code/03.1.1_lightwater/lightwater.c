@@ -1,6 +1,7 @@
 //
 // Filename   : lightwater.c
 // Description: use ten segment LED bar component
+// Components : LED bar
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,7 +23,7 @@ int32_t  main (void)
     // Declare and initialize variables
     //
     int32_t  position     = 0;
-    int32_t  LEDbar[]     = { 0, 1, 2, 3, 4, 5, 6, 8, 9, 10}; // wiringPi GPIO pins
+    int32_t  LEDbar[]     = { 0, 1, 2, 3, 4, 5, 6, 8, 9, 10 }; // wiringPi GPIO pins
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
