@@ -1,6 +1,7 @@
 //
 // Filename   : relay.c
 // Description: Control Motor with Button and Relay
+// Components : Motor, Relay, Button
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,8 +14,8 @@
 #include <stdint.h>                      // for C99 int32_t and int64_t types
 #include <stdlib.h>
 
-#define  relayPin  0                     // define the relayPin
-#define  buttonPin 1                     // define the buttonPin
+#define  BUTTONpin 1                     // define the BUTTONpin
+#define  RELAYpin  0                     // define the RELAYpin
 
 int32_t  main (void)
 {
@@ -44,9 +45,9 @@ int32_t  main (void)
     //
     // Configure button and relay
     //
-    pinMode (relayPin, OUTPUT);
-    pinMode (buttonPin, INPUT);
-    pullUpDnControl (buttonPin, PUD_UP); // pull up to high level
+    pinMode (RELAYpin, OUTPUT);
+    pinMode (BUTTONpin, INPUT);
+    pullUpDnControl (BUTTONpin, PUD_UP); // pull up to high level
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
 
@@ -57,7 +58,7 @@ int32_t  main (void)
         // Read the button: if the state has changed, record the time (in an offset
         //                  of milliseconds) of change
         //
-        reading                  = digitalRead (buttonPin);
+        reading                  = digitalRead (BUTTONpin);
         if (reading             != lastbuttonState)
         {
             lastChangeTime       = millis ();
@@ -108,7 +109,7 @@ int32_t  main (void)
             }
         }
 
-        digitalWrite (relayPin, relayState);
+        digitalWrite (RELAYpin, relayState);
         lastbuttonState          = reading;
     }
 

@@ -2,6 +2,7 @@
 // Filename   : motor.c
 // Description: Motor - control the motor
 //              Uses simplified C port of ADCDevice library.
+// Components : ADC module, motor
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,9 +18,9 @@
 #include <wiringPi.h>
 #include <ADCDevice.h>
 
-#define  motorPin1  2        // the wiringPi pin connected to L293D
-#define  motorPin2  0
-#define  enablePin  3
+#define  MOTORpin1  2        // the wiringPi pin connected to L293D
+#define  MOTORpin2  0
+#define  ENABLEpin  3
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -53,10 +54,10 @@ int32_t main (void)
     //
     // Set pin modes and create a software PWM pin
     //
-    pinMode (enablePin, OUTPUT);
-    pinMode (motorPin1, OUTPUT);
-    pinMode (motorPin2, OUTPUT);
-    softPwmCreate (enablePin, 0, 100);
+    pinMode (ENABLEpin, OUTPUT);
+    pinMode (MOTORpin1, OUTPUT);
+    pinMode (MOTORpin2, OUTPUT);
+    softPwmCreate (ENABLEpin, 0, 100);
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
 
@@ -120,8 +121,8 @@ void motor (int32_t ADCvalue)
     //
     if (value      >  0)
     {
-        digitalWrite (motorPin1, HIGH);
-        digitalWrite (motorPin2, LOW);
+        digitalWrite (MOTORpin1, HIGH);
+        digitalWrite (MOTORpin2, LOW);
         fprintf (stdout, "[MOTOR] Turning Forward ...\n");
     }
 
@@ -131,8 +132,8 @@ void motor (int32_t ADCvalue)
     //
     else if (value <  0)
     {
-        digitalWrite (motorPin1, LOW);
-        digitalWrite (motorPin2, HIGH);
+        digitalWrite (MOTORpin1, LOW);
+        digitalWrite (MOTORpin2, HIGH);
         fprintf (stdout, "[MOTOR] Turning Backward ...\n");
     }
 
@@ -142,8 +143,8 @@ void motor (int32_t ADCvalue)
     //
     else
     {
-        digitalWrite (motorPin1, LOW);
-        digitalWrite (motorPin2, LOW);
+        digitalWrite (MOTORpin1, LOW);
+        digitalWrite (MOTORpin2, LOW);
         fprintf (stdout, "[MOTOR] Stopped.\n");
     }
 
@@ -152,6 +153,6 @@ void motor (int32_t ADCvalue)
     // Regardless of the direction, the magnitude of the value is written, determining
     // the overall motor speed (0-128), mapped to our software PWM levels of 0-100
     //
-    softPwmWrite (enablePin, map (abs (value), 0, 128, 0, 100));
+    softPwmWrite (ENABLEpin, map (abs (value), 0, 128, 0, 100));
     fprintf (stdout, "The PWM duty cycle is: %d%%\n", abs (value) * 100 / 127);
 }
