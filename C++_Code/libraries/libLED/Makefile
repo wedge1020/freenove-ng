@@ -14,9 +14,6 @@ $(PROJ):
 	$(CXX) $(CXXFLAGS) -c $(PROJ).cc -o $(PROJ).o $(LIBS)
 	$(CXX) -shared $(CXXFLAGS) -o lib$(PROJ).so $(PROJ).o $(LIBS)
 
-test:
-	$(CXX) $(CXXFLAGS) $(PROJ)test.cc -o $(PROJ)test $(CXXLIBS)
-
 install:
 	@echo -n "Initializing installation directories ... "
 	@/bin/mkdir -p   /usr/include        /usr/lib && echo -n ".."  || exit
@@ -30,4 +27,4 @@ install:
 	@echo "INSTALLATION COMPLETE"
 
 clean:
-	@rm -vrf .*.sw[op] *.o lib$(PROJ).so $(PROJ)test *.save* *~ core
+	@rm -vrf .*.sw[op] *.o lib$(PROJ).so *.save* *~ core
