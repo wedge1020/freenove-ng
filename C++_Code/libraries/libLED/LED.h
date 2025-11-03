@@ -1,7 +1,7 @@
 //
-// Filename    : LED.h
-// Description : libLED C++ class library for use with freenove-ng tutorial code
-// Author      : Matthew Haas
+// Filename:    LED.h
+// Description: libLED C++ class library for use with freenove-ng tutorial code
+// Author:      Matthew Haas
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
