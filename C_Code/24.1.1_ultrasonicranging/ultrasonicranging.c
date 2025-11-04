@@ -19,7 +19,7 @@
 #define  MAX_DISTANCE 220             // define the maximum measured distance
 #define  TIMEOUT      MAX_DISTANCE*60 // calculate timeout
 
-typedef  struct timeval TimeVal;
+typedef  struct timeval TimeVal;      // alias for convenience
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -85,34 +85,49 @@ int32_t  main (void)
 //
 int32_t  pulseIn (int32_t  pin, int32_t  level, int32_t  timeout)
 {
-    int64_t  micros           = 0;
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Declare and initialize local variables
+    //
+    int64_t  micros            = 0;
     TimeVal  tn;
     TimeVal  t0;
     TimeVal  t1;
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Obtain our initial time snapshot
+    //
     gettimeofday (&t0, NULL);
 
-    while (digitalRead (pin) != level)
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // While the sampling of the pin state doesn't match level, AND we have not yet
+    // surpassed the timeout threshold
+    //
+    while ((digitalRead (pin) != level) &&
+           (micros            <= timeout))
     {
+        ////////////////////////////////////////////////////////////////////////////////
+        //
+        // Obtain our current time snapshot
+        //
         gettimeofday (&tn, NULL);
-        if (tn.tv_sec        >  t0.tv_sec)
+        if (tn.tv_sec         >  t0.tv_sec)
         {
-            micros            = 1000000L;
+            micros             = 1000000L;
         }
         else
         {
-            micros            = 0;
+            micros             = 0;
         }
 
-        micros                = micros + (tn.tv_usec - t0.tv_usec);
-        if (micros           >  timeout)
-        {
-            return (0);
-        }
+        micros                 = micros + (tn.tv_usec - t0.tv_usec);
     }
 
     gettimeofday (&t1, NULL);
-    while (digitalRead (pin) == level)
+    while ((digitalRead (pin) != level) &&
+           (micros            <= timeout))
     {
         gettimeofday (&tn, NULL);
         if (tn.tv_sec        >  t0.tv_sec)
@@ -125,23 +140,31 @@ int32_t  pulseIn (int32_t  pin, int32_t  level, int32_t  timeout)
         }
 
         micros                = micros + (tn.tv_usec - t0.tv_usec);
-
-        if (micros           >  timeout)
-        {
-            return (0);
-        }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Calculate micros 
+    //
     if (tn.tv_sec            >  t1.tv_sec)
     {
         micros                = 1000000L;
+        micros                = micros + (tn.tv_usec - t1.tv_usec);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Check for the timeout state, and do no time calculations if so
+    //
+    else if (micros          >  timeout)
+    {
+        micros                = 0;
     }
     else
     {
         micros                = 0;
+        micros                = micros + (tn.tv_usec - t1.tv_usec);
     }
-
-    micros                    = micros + (tn.tv_usec - t1.tv_usec);
 
     return (micros);
 }
@@ -153,15 +176,32 @@ int32_t  pulseIn (int32_t  pin, int32_t  level, int32_t  timeout)
 //
 float  getSonar ()
 {
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Declare and initialize local variables
+    //
     int64_t  pingTime  = 0;
     float    distance  = 0.0;
 
-    digitalWrite (TRIGGERpin, HIGH); //send 10us high level to TRIGGERpin
-
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Initiate a SENSOR read (send TRIGGER HIGH for 10us)
+    //
+    digitalWrite (TRIGGERpin, HIGH);
     delayMicroseconds (10);
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Set TRIGGER LOW and commence with the read, via the ECHO pin and time offsets
+    //
     digitalWrite (TRIGGERpin, LOW);
-    pingTime           = pulseIn (ECHOpin, HIGH, TIMEOUT);   //read plus time of ECHOpin
-    distance           = (float) pingTime * 340.0 / 2.0 / 10000.0; //calculate distance with sound speed 340m/s
+    pingTime           = pulseIn (ECHOpin, HIGH, TIMEOUT);
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Calculate the distance (based on sound speed of 340m/s)
+    //
+    distance           = (float) pingTime * 340.0 / 2.0 / 10000.0;
+
     return (distance);
 }
