@@ -69,7 +69,7 @@ int32_t  main (void)
 
             ////////////////////////////////////////////////////////////////////////////
             //
-            // Complete the current transaction by setting LATCHpin HIGH 
+            // Complete the current transaction by setting LATCHpin HIGH
             //
             digitalWrite (LATCHpin, HIGH);
 

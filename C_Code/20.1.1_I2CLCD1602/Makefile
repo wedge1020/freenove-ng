@@ -1,4 +1,4 @@
-LIBS = -lm -lwiringPi
+LIBS = -lm -lwiringPi -lwiringPiDev
 CFLAGS = -Wall --std=gnu18
 INC = 
 CC = gcc

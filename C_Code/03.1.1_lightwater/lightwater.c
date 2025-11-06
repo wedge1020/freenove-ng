@@ -37,7 +37,7 @@ int32_t  main (void)
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
-    // initialize each LEDbar wiringPi pin to OUTPUT mode 
+    // initialize each LEDbar wiringPi pin to OUTPUT mode
     //
     for (position = 0; position < NUM_LEDS; position++)
     {

@@ -144,7 +144,7 @@ int32_t  pulseIn (int32_t  pin, int32_t  level, int32_t  timeout)
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
-    // Calculate micros 
+    // Calculate micros
     //
     if (tn.tv_sec            >  t1.tv_sec)
     {
