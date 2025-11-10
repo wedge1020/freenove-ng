@@ -1,0 +1,11 @@
+Matrix Keypad library
+=====================
+C port of Freenove C++ code
+  * key code:
+    * originally written by:
+	  * Mark Stanley <mstanley@technologist.com>
+  
+  * keypad code:
+    * originally written by:
+	  * Mark Stanley <mstanley@technologist.com>
+	  * Alexander Brevig <alexanderbrevig@gmail.com>
