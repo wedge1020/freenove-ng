@@ -1,8 +1,8 @@
 //
-// Filename   : motor.c
+// Filename:    motor.c
 // Description: Motor - control the motor
 //              Uses simplified C port of ADCDevice library.
-// Components : ADC module, motor
+// Components:  ADC module, motor
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -11,11 +11,11 @@
 // Pre-processor directives
 //
 #include <math.h>
-#include <softPwm.h>
 #include <stdio.h>
 #include <stdint.h>          // for C99 int32_t and int64_t types
 #include <stdlib.h>
 #include <wiringPi.h>
+#include <softPwm.h>
 #include <ADCDevice.h>
 
 #define  MOTORpin1  2        // the wiringPi pin connected to L293D

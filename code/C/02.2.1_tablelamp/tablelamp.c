@@ -1,7 +1,7 @@
 //
-// Filename   : tablelamp.c
+// Filename:    tablelamp.c
 // Description: DIY MINI table lamp
-// Components : LED, BUTTON
+// Components:  LED, BUTTON
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

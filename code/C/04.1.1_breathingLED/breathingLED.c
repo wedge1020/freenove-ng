@@ -1,7 +1,7 @@
 //
-// Filename   : breathingLED.c
+// Filename:    breathingLED.c
 // Description: simulate a "breathing" LED with software PWM
-// Components : LED
+// Components:  LED
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

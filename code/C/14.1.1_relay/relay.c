@@ -1,7 +1,7 @@
 //
-// Filename   : relay.c
+// Filename:    relay.c
 // Description: Control Motor with Button and Relay
-// Components : Motor, Relay, Button
+// Components:  Motor, Relay, Button
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -9,10 +9,10 @@
 //
 // Preprocessor directives: include headers and define symbols
 //
-#include <wiringPi.h>
 #include <stdio.h>
 #include <stdint.h>                      // for C99 int32_t and int64_t types
 #include <stdlib.h>
+#include <wiringPi.h>
 
 #define  BUTTONpin 1                     // define the BUTTONpin
 #define  RELAYpin  0                     // define the RELAYpin

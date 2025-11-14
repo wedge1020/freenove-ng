@@ -1,7 +1,7 @@
 //
-// Filename   : alertor.c
+// Filename:    alertor.c
 // Description: Make Alertor with BUZZER and BUTTON
-// Components : BUTTON, BUZZER
+// Components:  BUTTON, BUZZER
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

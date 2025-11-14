@@ -1,8 +1,8 @@
 //
-// Filename   : ADC.c
+// Filename:    ADC.c
 // Description: Use ADC module to read the voltage value of potentiometer.
 //              Uses simplified C port of ADCDevice library.
-// Components : ADC module, potentiometer
+// Components:  ADC module, potentiometer
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

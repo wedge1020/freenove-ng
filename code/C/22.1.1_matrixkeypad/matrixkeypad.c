@@ -1,6 +1,6 @@
 //
-// Filename    : MatrixKeypad.cpp
-// Description : Obtain the key code of 4x4 Matrix Keypad
+// Filename:    matrixkeypad.c
+// Description: Obtain the key code of 4x4 Matrix Keypad
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

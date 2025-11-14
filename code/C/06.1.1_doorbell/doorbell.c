@@ -1,7 +1,7 @@
 //
-// Filename   : doorbell.c
+// Filename:    doorbell.c
 // Description: Make doorbell with buzzer and button.
-// Components : BUZZER, BUTTON
+// Components:  BUZZER, BUTTON
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

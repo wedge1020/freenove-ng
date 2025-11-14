@@ -1,7 +1,7 @@
 //
-// Filename   : LEDmatrix.c
+// Filename:    LEDmatrix.c
 // Description: Control LEDmatrix by 74HC595
-// Components : 74HC595, LEDmatrix
+// Components:  74HC595, LEDmatrix
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

@@ -1,7 +1,7 @@
 //
-// Filename   : colorfulLED.c
+// Filename:    colorfulLED.c
 // Description: Random color change on RGB LED
-// Components : RGB LED
+// Components:  RGB LED
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

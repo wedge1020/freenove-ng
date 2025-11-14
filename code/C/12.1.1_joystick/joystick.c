@@ -1,5 +1,5 @@
 //
-// Filename   : joystick.c
+// Filename:    joystick.c
 // Description: Read the Joystick
 //              Uses simplified C port of ADCDevice library.
 //
@@ -9,11 +9,11 @@
 //
 // Declare Global ADCDevice variable
 //
-#include <wiringPi.h>
-#include <softPwm.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <wiringPi.h>
+#include <softPwm.h>
 #include <ADCDevice.h>
 
 #define  Z_Pin  1     // define pin for Z-axis

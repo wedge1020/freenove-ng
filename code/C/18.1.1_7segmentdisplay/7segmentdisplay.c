@@ -1,7 +1,7 @@
 //
-// Filename   : 7segmentdisplay.c
+// Filename:    7segmentdisplay.c
 // Description: Control SevenSegmentDisplay by 74HC595
-// Components : 74HC595, 7 segment display
+// Components:  74HC595, 7 segment display
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

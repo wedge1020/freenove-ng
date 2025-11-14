@@ -1,5 +1,5 @@
 //
-// Filename   : steppingmotor.c
+// Filename:    steppingmotor.c
 // Description: Drive stepping Motor
 //
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -89,10 +89,10 @@ void moveOnePeriod (int32_t  direction, int32_t  ms)
     //
     // Declare and initialize iteration variables
     //
-    int32_t phase                   = 0;
-    int32_t pin                     = 0;
-    int32_t position                = 0;
-    int32_t value                   = 0;
+    int32_t  phase                  = 0;
+    int32_t  pin                    = 0;
+    int32_t  position               = 0;
+    int32_t  value                  = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //

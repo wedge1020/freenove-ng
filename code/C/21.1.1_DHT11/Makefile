@@ -2,7 +2,7 @@ LIBS = -lm -lwiringPi
 CFLAGS = -Wall --std=gnu18
 INC = 
 CC = gcc
-PROJ = DHT11
+PROJ = DHT
 all: $(PROJ)
 
 debug: CFLAGS += -DDEBUG -g

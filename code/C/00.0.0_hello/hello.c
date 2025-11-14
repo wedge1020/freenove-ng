@@ -1,7 +1,7 @@
 //
-// Filename   : blink.c
+// Filename:    blink.c
 // Description: basic usage of GPIO. Let led blink.
-// Components : none
+// Components:  none
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

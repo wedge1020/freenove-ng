@@ -1,7 +1,7 @@
 //
-// Filename   : buttonLED.c
+// Filename:    buttonLED.c
 // Description: control LED state with BUTTON
-// Components : LED, BUTTON
+// Components:  LED, BUTTON
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

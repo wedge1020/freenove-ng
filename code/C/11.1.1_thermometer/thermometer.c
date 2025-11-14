@@ -1,5 +1,5 @@
 //
-// Filename   : thermometer.c
+// Filename:    thermometer.c
 // Description: DIY Thermometer
 //              Uses simplified C port of ADCDevice library.
 //
@@ -9,11 +9,11 @@
 //
 // Pre-processor directives
 //
-#include <wiringPi.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <math.h>
+#include <wiringPi.h>
 #include <ADCDevice.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -28,7 +28,7 @@ int32_t  main (void)
     //
     // Declare and initialize variables
     //
-    int32_t    adcValue  = 0;
+    int32_t    ADCvalue  = 0;
     float      voltage   = 0.0;
     float      rt        = 0.0;
     float      tempK     = 0.0;
@@ -49,12 +49,12 @@ int32_t  main (void)
     //
     while (1)
     {
-        adcValue         = adc -> analogRead (0);          // read value of A0 pin
-        voltage          = (float) adcValue / 255.0 * 3.3; // Calculate voltage
+        ADCvalue         = adc -> analogRead (0);          // read value of A0 pin
+        voltage          = (float) ADCvalue / 255.0 * 3.3; // Calculate voltage
         rt               = 10 * voltage / (3.3 - voltage); // Thermister resistance
         tempK            = 1 / (1 / (273.15 + 25) + log (rt / 10) / 3950.0);
         tempC            = tempK - 273.15;                 // Calculate Celsius
-        fprintf (stdout, "ADC value: %3d, Voltage: %.2fV ", adcValue, voltage);
+        fprintf (stdout, "ADC value: %3d, Voltage: %.2fV ", ADCvalue, voltage);
         fprintf (stdout, "Temperature: %.2fC\n", tempC);
         delay (100);
     }

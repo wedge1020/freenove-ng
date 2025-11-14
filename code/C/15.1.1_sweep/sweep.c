@@ -1,5 +1,5 @@
 //
-// Filename   : sweep.c
+// Filename:    sweep.c
 // Description: Servo sweep
 //
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +18,7 @@
 #define SERVO_MIN_MS 5+OFFSET_MS  // pulse duration for minimum angle of servo
 #define SERVO_MAX_MS 25+OFFSET_MS // pulse duration for maximum angle of servo
 
-#define servoPin     1            // wiringPi GPIO number connected to servo
+#define SERVOpin     1            // wiringPi GPIO number connected to servo
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -51,7 +51,7 @@ int32_t  main (void)
     //
     // Initialize PWM pin of servo
     //
-    servoInit (servoPin);
+    servoInit (SERVOpin);
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
 
@@ -64,7 +64,7 @@ int32_t  main (void)
         //
         for (position = SERVO_MIN_MS; position < SERVO_MAX_MS; position++)
         {
-            servoWriteMS (servoPin, position);
+            servoWriteMS (SERVOpin, position);
         }
         delay (500);
 
@@ -75,7 +75,7 @@ int32_t  main (void)
         //
         for (position = SERVO_MAX_MS; position > SERVO_MIN_MS; position--)
         {
-            servoWriteMS (servoPin, position);
+            servoWriteMS (SERVOpin, position);
         }
         delay (500);
     }

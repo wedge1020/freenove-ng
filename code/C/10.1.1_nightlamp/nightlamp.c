@@ -1,5 +1,5 @@
 //
-// Filename   : nightlamp.c
+// Filename:    nightlamp.c
 // Description: Nightlamp - use photoresistor to control LED.
 //              Uses simplified C port of ADCDevice library.
 //
@@ -9,14 +9,14 @@
 //
 // Pre-processor directives
 //
-#include <wiringPi.h>
-#include <softPwm.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <wiringPi.h>
+#include <softPwm.h>
 #include <ADCDevice.h>
 
-#define  ledPin 0
+#define  LEDpin 0
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -30,7 +30,7 @@ int32_t  main (void)
     //
     // Declare and initialize variables
     //
-    int32_t    adcValue  = 0;
+    int32_t    ADCvalue  = 0;
     float      voltage   = 0.0;
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +44,7 @@ int32_t  main (void)
     //
     // Create software PWM control for LED
     //
-    softPwmCreate (ledPin, 0, 100);
+    softPwmCreate (LEDpin, 0, 100);
 
     fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
 
@@ -54,10 +54,10 @@ int32_t  main (void)
     //
     while (1)
     {
-        adcValue         = adc -> analogRead (0);          // read value of A0 pin
-        softPwmWrite (ledPin, adcValue * 100 / 255);       // Mapping to PWM duty cycle
-        voltage          = (float) adcValue / 255.0 * 3.3; // Calculate voltage
-        fprintf (stdout, "ADC value: %3d, Voltage: %.2fV\n", adcValue, voltage);
+        ADCvalue         = adc -> analogRead (0);          // read value of A0 pin
+        softPwmWrite (LEDpin, ADCvalue * 100 / 255);       // Mapping to PWM duty cycle
+        voltage          = (float) ADCvalue / 255.0 * 3.3; // Calculate voltage
+        fprintf (stdout, "ADC value: %3d, Voltage: %.2fV\n", ADCvalue, voltage);
         delay (100);
     }
 

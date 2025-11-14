@@ -1,7 +1,7 @@
 //
-// Filename   : lightwater02.c
+// Filename:    lightwater02.c
 // Description: Control LED by 74HC595
-// Components : LED, 74HC595
+// Components:  LED, 74HC595
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 

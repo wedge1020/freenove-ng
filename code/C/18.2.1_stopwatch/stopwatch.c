@@ -1,7 +1,7 @@
 //
-// Filename   : stopwatch.c
+// Filename:    stopwatch.c
 // Description: Control 4-Digit 7-Segment Display by 74HC595
-// Components : 74HC595, 4-digit 7-segment display
+// Components:  74HC595, 4-digit 7-segment display
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
