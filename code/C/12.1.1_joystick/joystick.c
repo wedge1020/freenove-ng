@@ -1,7 +1,7 @@
 //
 // Filename:    joystick.c
 // Description: Read the Joystick
-//              Uses simplified C port of ADCDevice library.
+// NOTE:        needs ADCDevice library from code/C/libraries/ADCDevice
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
