@@ -1,7 +1,7 @@
 //
 // Filename:    softlight.c
 // Description: Use potentiometer to control LED
-//              Uses simplified C port of ADCDevice library.
+// NOTE:        needs ADCDevice library from code/C/libraries/ADCDevice
 // Components:  ADC module, potentiometer, LED
 //
 ////////////////////////////////////////////////////////////////////////////////////////

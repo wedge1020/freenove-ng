@@ -1,7 +1,7 @@
 //
 // Filename:    motor.c
 // Description: Motor - control the motor
-//              Uses simplified C port of ADCDevice library.
+// NOTE:        needs ADCDevice library from code/C/libraries/ADCDevice
 // Components:  ADC module, motor
 //
 ////////////////////////////////////////////////////////////////////////////////////////

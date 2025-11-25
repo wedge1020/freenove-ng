@@ -1,7 +1,7 @@
 //
 // Filename:    thermometer.c
 // Description: DIY Thermometer
-//              Uses simplified C port of ADCDevice library.
+// NOTE:        needs ADCDevice library from code/C/libraries/ADCDevice
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
