@@ -63,7 +63,7 @@ int32_t main (void)
             // Output the values in num[]
             //
             digitalWrite (LATCHpin, LOW);
-            shiftOut (DATApin, CLOCKpin, MSBFIRST, num[index]);
+            _shiftOut (DATApin, CLOCKpin, MSBFIRST, num[index]);
             digitalWrite (LATCHpin, HIGH);
             delay (500);
         }
@@ -75,10 +75,31 @@ int32_t main (void)
             // Display the decimal point
             //
             digitalWrite (LATCHpin, LOW);
-            shiftOut (DATApin, CLOCKpin, MSBFIRST, num[index] & 0x7f);
+            _shiftOut (DATApin, CLOCKpin, MSBFIRST, num[index] & 0x7f);
             digitalWrite (LATCHpin, HIGH);
             delay (500);
         }
     }
     return (0);
+}
+
+void _shiftOut (int32_t  dPin, int32_t  cPin, int32_t  order, int32_t  val)
+{   
+    int32_t  index  = 0;  
+    for (index = 0; index < 8; index++)
+    {
+        digitalWrite (cPin, LOW);
+        if (order  == LSBFIRST)
+        {
+            digitalWrite (dPin, ((0x01&(val>>index)) == 0x01) ? HIGH : LOW);
+            delayMicroseconds (10);
+        }
+        else
+        {//if(order == MSBFIRST){
+            digitalWrite (dPin,((0x80&(val<<index)) == 0x80) ? HIGH : LOW);
+            delayMicroseconds (10);
+        }
+        digitalWrite (cPin, HIGH);
+        delayMicroseconds (10);
+    }
 }
