@@ -1,7 +1,8 @@
 LIBS = -lm -lwiringPi
-CFLAGS = -Wall --std=gnu18
+CXXLIBS = $(LIBS)
+CXXFLAGS = -Wall
 INC = 
-CC = gcc
+CXX = gcc
 PROJ = buttonLED
 all: $(PROJ)
 
@@ -10,7 +11,7 @@ debug: DEBUG = debug
 debug: $(PROJ)
 
 $(PROJ):
-	$(CC) $(CFLAGS) $(PROJ).c -o $(PROJ) $(LIBS)
+	$(CXX) $(CXXFLAGS) $(PROJ).c -o $(PROJ) $(CXXLIBS)
 
 clean:
 	@rm -vrf .*.sw[op] *.o $(PROJ) *.save* *~ core

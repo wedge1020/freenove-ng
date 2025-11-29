@@ -11,7 +11,7 @@ debug: DEBUG = debug
 debug: $(PROJ)
 
 $(PROJ):
-	$(CXX) $(CXXFLAGS) $(PROJ).cc -o $(PROJ) $(LIBS)
+	$(CXX) $(CXXFLAGS) $(PROJ).cc -o $(PROJ) $(CXXLIBS)
 
 clean:
 	@rm -vrf .*.sw[op] *.o $(PROJ) *.save* *~ core
