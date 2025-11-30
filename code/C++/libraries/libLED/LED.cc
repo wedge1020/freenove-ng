@@ -50,7 +50,7 @@ int  LED :: getPin (void) {
 // getState(): return a string of "HIGH" or "LOW" reflecting the current state
 //             of this LED instance
 //
-char * LED :: getState (void) {
+char * LED :: getStateName (void) {
     char *result          = NULL;
 
     result                = (char *) malloc (sizeof (char) * 6);
