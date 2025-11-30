@@ -10,13 +10,13 @@
 
 class LED {
     public:
-              LED      (int);         // wiringPi pin
-              LED      (int, int);    // wiringPi pin, initial state (HIGH, LOW)
-        int   getPin   (void);        // retrieves the wiringPi pin
-        char *getState (void);        // returns "HIGH" or "LOW" for output
-        int   getState (void);        // returns the current state of the instance
-        void  toggle   (void);        // flip the current state
-        void  write    (int);         // set the state of the LED
+              LED          (int);         // wiringPi pin
+              LED          (int, int);    // wiringPi pin, initial state (HIGH, LOW)
+        int   getPin       (void);        // retrieves the wiringPi pin
+        char *getStateName (void);        // returns "HIGH" or "LOW" for output
+        int   getState     (void);        // returns the current state of the instance
+        void  toggle       (void);        // flip the current state
+        void  write        (int);         // set the state of the LED
 
     private:
         int   pin;
