@@ -1,8 +1,8 @@
-LIBS = -lm -lwiringPi
-CXXLIBS = $(LIBS)
+LIBS = -lwiringPi
+CXXLIBS = $(LIBS) -lLED
 CXXFLAGS = -Wall
 INC = 
-CXX = gcc
+CXX = g++
 PROJ = tablelamp
 all: $(PROJ)
 
