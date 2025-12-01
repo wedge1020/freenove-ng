@@ -5,7 +5,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
+#include <iostream>
 #include <wiringPi.h>
 #include <LED.h>                                     // libLED-provided header
 
@@ -25,7 +25,7 @@ int main (void) {
     //
     if (wiringPiSetup () == -1)
     {
-        fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
+        std::cout << "[ERROR] Could not initialize wiringPi Library!" << std::endl;
         exit (1);
     }
 

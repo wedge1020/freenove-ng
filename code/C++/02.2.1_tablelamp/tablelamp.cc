@@ -10,7 +10,7 @@
 // Pre-processor directives
 //
 #include <iostream>
-#include <stdint.h>
+#include <cstdint>
 #include <wiringPi.h>
 
 #define  LEDpin     0  // GPIO wiringPi pin for the LED

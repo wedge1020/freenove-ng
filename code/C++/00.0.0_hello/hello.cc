@@ -10,7 +10,8 @@
 // Pre-processor directives: access the standard library to use its functionality
 //
 #include <stdio.h>
-#include <stdint.h>
+#include <cstdint>
+#include <iostream>
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -22,7 +23,7 @@ int32_t  main ()
     //
     // display message to the screen
     //
-    fprintf (stdout, "Hello, World!\n");
+    std::cout << "Hello World!" << std::endl;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //

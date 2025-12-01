@@ -11,6 +11,7 @@
 //
 #include <iostream>
 #include <wiringPi.h>
+#include <cstdint>
 
 #define  LEDpin     0      // GPIO wiringPi pin for LED component
 #define  BUTTONpin  1    // GPIO wiringPi pin for BUTTON component
