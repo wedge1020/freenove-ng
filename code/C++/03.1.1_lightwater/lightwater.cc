@@ -1,5 +1,5 @@
 //
-// Filename:    lightwater.c
+// Filename:    lightwater.cc
 // Description: use ten segment LED bar component
 // Components:  LED bar
 //
