@@ -35,7 +35,7 @@ int32_t  main (void)
     //
     if (wiringPiSetup ()         == -1)
     {
-        fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
+        std::cout << "[ERROR] Could not initialize wiringPi library" << std::endl;
         exit (1);
     }
 
@@ -47,7 +47,7 @@ int32_t  main (void)
     pinMode (BUTTONpin, INPUT);           // BUTTON is an input component (we read it)
     pullUpDnControl (BUTTONpin, PUD_UP);  // pull up to high level
 
-    fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
+    std::cout << "Program is starting (CTRL-c to interrupt) ..." << std::endl;
 
     while (1)
     {
@@ -86,7 +86,8 @@ int32_t  main (void)
                     //
                     // reverse the LED state, and then report to user
                     //
-                    fprintf (stdout, "[BUTTON] PRESSED!\n");
+                    std::cout << "[BUTTON] PRESSED" << std::endl;
+
                     LEDstate      = !LEDstate;
                     if (LEDstate == HIGH)
                     {
@@ -104,7 +105,7 @@ int32_t  main (void)
                 //
                 else
                 {
-                    fprintf (stdout, "[BUTTON] RELEASED!\n");
+                    std::cout << "[BUTTON] RELEASED" << std::endl;
                 }
             }
         }
