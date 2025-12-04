@@ -25,14 +25,14 @@ int32_t  main (void)
     //
     // Declare and initialize variables
     //
-    LED    *light                 = NULL;
-    button *lightswitch           = NULL;
+    LED    *light                   = NULL;
+    button *lightswitch             = NULL;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Bring wiringPi functionality online
     //
-    if (wiringPiSetup ()         == -1)
+    if (wiringPiSetup ()           == -1)
     {
         fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
         exit (1);
@@ -42,8 +42,8 @@ int32_t  main (void)
     //
     // configure the peripheral pins for the appropriate modes of operation
     //
-    light                         = new LED (LEDpin);
-    lightswitch                   = new button (BUTTONpin);
+    light                           = new LED (LEDpin);
+    lightswitch                     = new button (BUTTONpin);
 
     fprintf (stdout, "Program is starting (CTRL-c to interupt) ... \n");
 
@@ -60,7 +60,7 @@ int32_t  main (void)
         //
         // on LOW signal read, BUTTON is pressed
         //
-        if (lightswitch -> read (void) == LOW)
+        if (lightswitch -> read () == LOW)
         {
             fprintf (stdout, "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bpressed,  LED: ON ");
             light -> write (HIGH);  // turn the LED on
