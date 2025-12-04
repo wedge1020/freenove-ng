@@ -13,12 +13,21 @@
 #include <cstdint>
 #include <cstdlib>
 #include <wiringPi.h>
+#include <LED.h>
+#include <button.h>
 
 #define  LEDpin     0    // GPIO wiringPi pin for LED component
 #define  BUTTONpin  1    // GPIO wiringPi pin for BUTTON component
 
 int32_t  main (void)
 {
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Declare and initialize variables
+    //
+    LED    *light                 = NULL;
+    button *lightswitch           = NULL;
+
     ////////////////////////////////////////////////////////////////////////////////////
     //
     // Bring wiringPi functionality online
@@ -33,9 +42,8 @@ int32_t  main (void)
     //
     // configure the peripheral pins for the appropriate modes of operation
     //
-    pinMode (LEDpin,    OUTPUT);          // LED is an output component (we write it)
-    pinMode (BUTTONpin, INPUT);           // BUTTON is an input component (we read it)
-    pullUpDnControl (BUTTONpin, PUD_UP);  // pull up to HIGH level
+    light                         = new LED (LEDpin);
+    lightswitch                   = new button (BUTTONpin);
 
     fprintf (stdout, "Program is starting (CTRL-c to interupt) ... \n");
 
@@ -52,10 +60,10 @@ int32_t  main (void)
         //
         // on LOW signal read, BUTTON is pressed
         //
-        if (digitalRead (BUTTONpin) == LOW)
+        if (lightswitch -> read (void) == LOW)
         {
             fprintf (stdout, "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bpressed,  LED: ON ");
-            digitalWrite (LEDpin, HIGH);  // turn the LED on
+            light -> write (HIGH);  // turn the LED on
         }
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +73,7 @@ int32_t  main (void)
         else
         {
             fprintf (stdout, "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\breleased, LED: OFF");
-            digitalWrite (LEDpin, LOW);   // turn the LED off
+            light -> write (LOW);   // turn the LED off
         }
     }
 
