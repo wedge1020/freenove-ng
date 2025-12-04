@@ -47,7 +47,7 @@ int32_t  main (void)
         if (digitalRead (SENSORpin) == HIGH)
         {
             digitalWrite (LEDpin, HIGH);
-            fprintf (stdout, "\n\n\nON ");
+            fprintf (stdout, "\b\b\bON ");
         }
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ int32_t  main (void)
         else
         {
             digitalWrite (LEDpin, LOW);
-            fprintf (stdout, "\n\n\nOFF");
+            fprintf (stdout, "\b\b\bOFF");
         }
     }
 
