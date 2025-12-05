@@ -6,9 +6,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 
 // Pre-processor directives
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <ADCDevice.h>
@@ -31,7 +31,7 @@ int32_t  main (void)
     // Create software PWM control for LED
     softPwmCreate (LEDpin, 0, 100);
 
-    fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
+    std::cout << "Program is starting (CTRL-c to interrupt)" << std:endl;
 
     // Main loop: proceed indefinitely until interruption
     while (1)
@@ -39,8 +39,8 @@ int32_t  main (void)
         ADCvalue         = adc -> analogRead (0);          // read value of A0 pin
         softPwmWrite (LEDpin, ADCvalue * 100 / 255);       // Mapping to PWM duty cycle
         voltage          = (float) ADCvalue / 255.0 * 3.3; // Calculate voltage
-        fprintf (stdout, "ADC value: %3d, Voltage: %.2fV\n", ADCvalue, voltage);
-        delay (100);
+        std::cout << "ADC value: " << ADCvalue << ", Voltage: " << voltage << "V" << std::endl;
+		delay (100);
     }
 
     return (0);
