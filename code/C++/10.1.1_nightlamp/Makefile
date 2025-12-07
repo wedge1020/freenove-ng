@@ -1,4 +1,4 @@
-LIBS = -lwiringPi
+LIBS = -lwiringPi -lADCDevice
 CXXLIBS = $(LIBS) -lLED
 CXXFLAGS = -Wall
 INC = 

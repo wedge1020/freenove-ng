@@ -6,6 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 
 // Pre-processor directives
+#include <iostream>
 #include <cstdio>
 #include <cstdint>
 #include <cstdlib>
@@ -31,7 +32,7 @@ int32_t  main (void)
     // Create software PWM control for LED
     softPwmCreate (LEDpin, 0, 100);
 
-    std::cout << "Program is starting (CTRL-c to interrupt)" << std:endl;
+    std :: cout << "Program is starting (CTRL-c to interrupt)" << std :: endl;
 
     // Main loop: proceed indefinitely until interruption
     while (1)
