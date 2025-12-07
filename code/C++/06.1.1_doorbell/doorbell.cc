@@ -28,7 +28,7 @@ int32_t  main (void)
     pullUpDnControl (BUTTONpin, PUD_UP);  // pull up to HIGH level
 
     std::cout << "Program is starting (CTRL-c to interrupt) ..." << std::endl;
-    std::cout << "[BUZZER] turned OFF") << std::endl;
+    std::cout << "[BUZZER] turned OFF" << std::endl;
 
     while (1)
     {
