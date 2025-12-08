@@ -1,5 +1,5 @@
 LIBS = -lm -lwiringPi -lADCDevice
-CXXLIBS = $(LIBS) -lLED
+CXXLIBS = $(LIBS)
 CXXFLAGS = -Wall
 INC = 
 CC = g++
