@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-########################################################################
-# Filename    : ButtonLED.py
-# Description : Control LED with button.
-# Author      : www.freenove.com
-# Modification: 2023/05/11
-########################################################################
+##
+## Filename:    buttonLED.py
+## Description: Control LED with button.
+##
+########################################################################################
 
 from gpiozero import LED, Button
 
-led = LED(17)        # define LED pin according to BCM Numbering
-button = Button(18)  # define Button pin according to BCM Numbering
+led = LED(17)                      # define LED pin according to BCM numbering
+button = Button(18)                # define Button pin according to BCM numbering
 
 def loop():
     while True:

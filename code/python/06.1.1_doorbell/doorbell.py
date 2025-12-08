@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-# Doorbell.py — simple buzzer doorbell using a button
-# Cleansed and updated for EOCE Fall 2025
+##
+## Filename:    doorbell.py
+## Description: simple buzzer doorbell using a button
+##
+########################################################################################
 
 from gpiozero import Buzzer, Button
 import time
