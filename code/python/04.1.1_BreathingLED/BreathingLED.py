@@ -75,7 +75,7 @@ def destroy():
 
     ########################################################################################
     ##
-    ## closes the connection the the LED pin
+    ## closes the connection to the LED pin
     ##
     led.close()
     
