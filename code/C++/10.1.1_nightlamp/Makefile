@@ -1,8 +1,8 @@
-LIBS = -lm -lwiringPi -lADCDevice
+LIBS = -lwiringPi -lADCDevice
 CXXLIBS = $(LIBS)
 CXXFLAGS = -Wall
 INC = 
-CC = gcc
+CXX = g++
 PROJ = nightlamp
 all: $(PROJ)
 

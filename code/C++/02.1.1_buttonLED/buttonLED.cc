@@ -5,48 +5,75 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////
+//
 // Pre-processor directives
-#include <iostream>
-#include <wiringPi.h>
+//
+#include <cstdio>
 #include <cstdint>
+#include <cstdlib>
+#include <wiringPi.h>
+#include <LED.h>
+#include <button.h>
 
-#define  LEDpin     0      // GPIO wiringPi pin for LED component
+#define  LEDpin     0    // GPIO wiringPi pin for LED component
 #define  BUTTONpin  1    // GPIO wiringPi pin for BUTTON component
 
 int32_t  main (void)
 {
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Declare and initialize variables
+    //
+    LED    *light                   = NULL;
+    button *lightswitch             = NULL;
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
     // Bring wiringPi functionality online
-    if (wiringPiSetup ()         == -1)
+    //
+    if (wiringPiSetup ()           == -1)
     {
-        std::cout << "[ERROR] Could not initialize wiringPi library!" << std::endl; 
+        fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
         exit (1);
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
     // configure the peripheral pins for the appropriate modes of operation
-    pinMode (LEDpin,    OUTPUT);          // LED is an output component (we write it)
-    pinMode (BUTTONpin, INPUT);           // BUTTON is an input component (we read it)
-    pullUpDnControl (BUTTONpin, PUD_UP);  // pull up to HIGH level
+    //
+    light                           = new LED (LEDpin);
+    lightswitch                     = new button (BUTTONpin);
 
-    std::cout << "Program is starting (CTRL-c to interupt) ..." << std::endl;
+    fprintf (stdout, "Program is starting (CTRL-c to interupt) ... \n");
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
     // Display the default status (note the lack of newline at the end, so that with
     // the strategic use of backspaces, we can update this line in place)
-    std::cout << " BUTTON: released, LED: OFF" << std::endl;
+    //
+    fprintf (stdout, "BUTTON: released, LED: OFF");
 
     while (1)
     {
+        ////////////////////////////////////////////////////////////////////////////////
+        //
         // on LOW signal read, BUTTON is pressed
-        if (digitalRead (BUTTONpin) == LOW)
+        //
+        if (lightswitch -> read () == LOW)
         {
-            digitalWrite (LEDpin, HIGH);  // turn the LED on
-            //fprintf (stdout, "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bpressed,  LED: ON ");
+            fprintf (stdout, "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bpressed,  LED: ON ");
+            light -> write (HIGH);  // turn the LED on
         }
 
+        ////////////////////////////////////////////////////////////////////////////////
+        //
         // on HIGH signal read, BUTTON is released
+        //
         else
         {
-            digitalWrite (LEDpin, LOW);   // turn the LED off
-            //fprintf (stdout, "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\breleased, LED: OFF");
+            fprintf (stdout, "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\breleased, LED: OFF");
+            light -> write (LOW);   // turn the LED off
         }
     }
 

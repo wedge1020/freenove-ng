@@ -1,9 +1,9 @@
-LIBS = -lwiringPi
-CXXLIBS = $(LIBS) -lLED -lbutton
+LIBS = -lm -lwiringPi -lADCDevice
+CXXLIBS = $(LIBS)
 CXXFLAGS = -Wall
 INC = 
-CXX = g++
-PROJ = buttonLED
+CC = g++
+PROJ = softlight
 all: $(PROJ)
 
 debug: CFLAGS += -DDEBUG -g
