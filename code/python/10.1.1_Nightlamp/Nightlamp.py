@@ -15,9 +15,11 @@ ledPin = 17 # define ledPin
 led = PWMLED(ledPin)
 adc = ADCDevice() # Define an ADCDevice class object
 
+
 # Checks if either pcf or ads is detected and if so assigns it to adc
 # if neither is detected, an error message gets printed and 
 # exits the program
+
 def setup():
     global adc
     if(adc.detectI2C(0x48)): # Detect the pcf8591.
@@ -29,6 +31,18 @@ def setup():
         "Please use command 'i2cdetect -y 1' to check the I2C address! \n"
         "Exiting program. \n");
         exit(-1)
+
+# Checks if this module is th main module and if so proceeds.
+# Will than try to perform the loop function further down unless
+# the keyboard interrupt shortcut is used which will end the program
+if __name__ == '__main__':   # Program entrance
+     print ('Program is starting... ')
+     setup()
+     try:
+         loop()
+     except KeyboardInterrupt:  # Press ctrl-c to end the program.
+         destroy()
+         print("Ending program")
 
 # Adjusts the brightness of the light depending on the ADC value
 def loop():
@@ -43,13 +57,4 @@ def loop():
 def destroy():
     led.close()
     adc.close()
-    
-if __name__ == '__main__':   # Program entrance
-    print ('Program is starting... ')
-    setup()
-    try:
-        loop()
-    except KeyboardInterrupt:  # Press ctrl-c to end the program.
-        destroy()
-        print("Ending program")
-        
+       
