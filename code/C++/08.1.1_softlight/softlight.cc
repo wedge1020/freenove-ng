@@ -39,6 +39,7 @@ int32_t  main (void)
     }
     else
     {
+	// Prompts error message if I2C address undetected
         fprintf (stderr, "No correct I2C address found, \n"
         "Please use command 'i2cdetect -y 1' to check the I2C address! \n"
         "Program Exit. \n");
@@ -48,6 +49,7 @@ int32_t  main (void)
     // Create software PWM control for LED
     softPwmCreate (LEDpin, 0, 100);
 
+	// Prints program starting statement
     std::cout << "Program is starting (CTRL-c to interrupt) ..." << std::endl;
 
     // Main loop: proceed indefinitely until interruption
