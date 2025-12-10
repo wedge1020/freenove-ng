@@ -27,9 +27,11 @@ int32_t  main (void)
     pinMode (BUZZERpin, OUTPUT);
     pullUpDnControl (BUTTONpin, PUD_UP);  // pull up to HIGH level
 
+	// Print out program starting text
     std::cout << "Program is starting (CTRL-c to interrupt) ..." << std::endl;
     std::cout << "[BUZZER] turned OFF" << std::endl;
 
+	// Main loop
     while (1)
     {
         // Button is pressed, turn on buzzer
