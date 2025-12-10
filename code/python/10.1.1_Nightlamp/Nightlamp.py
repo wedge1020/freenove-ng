@@ -32,18 +32,6 @@ def setup():
         "Exiting program. \n");
         exit(-1)
 
-# Checks if this module is th main module and if so proceeds.
-# Will than try to perform the loop function further down unless
-# the keyboard interrupt shortcut is used which will end the program
-if __name__ == '__main__':   # Program entrance
-     print ('Program is starting... ')
-     setup()
-     try:
-         loop()
-     except KeyboardInterrupt:  # Press ctrl-c to end the program.
-         destroy()
-         print("Ending program")
-
 # Adjusts the brightness of the light depending on the ADC value
 def loop():
     while True:
@@ -57,4 +45,16 @@ def loop():
 def destroy():
     led.close()
     adc.close()
+
+# Checks if this module is th main module and if so proceeds.
+# Will than try to perform the loop function further down unless
+# the keyboard interrupt shortcut is used which will end the program
+if __name__ == '__main__':   # Program entrance
+     print ('Program is starting... ')
+     setup()
+     try:
+         loop()
+     except KeyboardInterrupt:  # Press ctrl-c to end the program.
+         destroy()
+         print("Ending program")
        
