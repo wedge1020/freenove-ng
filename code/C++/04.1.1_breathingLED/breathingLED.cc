@@ -11,12 +11,24 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 
-#define  LEDpin    1  // wiringPi GPIO pin
+
+class LED
+{
+public:
+    LED();
+    LED(int32_t bval, int pin);
+    
+    void breathOn();
+    void breathOff();
+    int32_t getPin();
+private:
+    // Declare and initialize variables
+    int32_t level;
+    int32_t LEDpin; // wiringPi GPIO pin
+};
 
 int32_t  main (void)
 {
-    // Declare and initialize variables
-    int32_t level = 0;
 
     // Bring wiringPi functionality online
     if (wiringPiSetup() == -1)
@@ -25,8 +37,11 @@ int32_t  main (void)
         exit(1);
     }
 
+    LED newLED;
+    
     // Initialize LEDpin for software PWM operation, with a range from 0 to 100
-    softPwmCreate(LEDpin, 0, 100);
+    softPwmCreate(newLED.getPin(), 0, 100);
+
 
     std::cout << "Program is starting (CTRL-c to interrupt) ..." << std::endl;
 
@@ -37,11 +52,7 @@ int32_t  main (void)
         // adjust the LED gradually from fully OFF (0) to fully ON (100), one step at
         // a time
         //
-        for (level = 0; level < 100; level++)
-        {
-            softPwmWrite(LEDpin, level);
-            delay(20);
-        }
+        newLED.breathOn();
 
         // strategic delay for better user perception
         delay(300);
@@ -51,11 +62,7 @@ int32_t  main (void)
         // adjust the LED gradually from fully ON (100) to fully OFF (0), one step at
         // a time
         //
-        for (level = 100; level >= 0; level--)
-        {
-            softPwmWrite(LEDpin, level);
-            delay(20);
-        }
+        newLED.breathOff();
 
         // strategic delay for better user perception
         delay(300);
@@ -64,3 +71,48 @@ int32_t  main (void)
     return (0);
 }
 
+LED::LED()
+{
+    level = 0;
+    LEDpin = 1;
+}
+
+LED::LED(int32_t bval, int32_t pin)
+{
+   level = bval;
+   LEDpin = pin;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// adjust the LED gradually from fully OFF (0) to fully ON (100), one step at
+// a time
+//
+void LED::breathOn()
+{
+    
+    for (level = 0; level < 100; level++)
+    {
+        softPwmWrite(LEDpin, level);
+        delay(20);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// adjust the LED gradually from fully ON (100) to fully OFF (0), one step at
+// a time
+//
+void LED::breathOff()
+{
+    for (level = 100; level >= 0; level--)
+    {
+        softPwmWrite(LEDpin, level);
+        delay(20);
+    }
+}
+
+int32_t LED::getPin()
+{
+  return LEDpin;
+}
