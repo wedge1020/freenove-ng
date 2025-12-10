@@ -19,6 +19,8 @@
 #define  LATCHpin  2    // ST_CP Pin of 74HC595 (Pin12)
 #define  CLOCKpin  3    // CH_CP Pin of 74HC595 (Pin11)
 
+void    _shiftOut (int32_t, int32_t, int32_t, int32_t);
+
 int32_t main (void)
 {
     ////////////////////////////////////////////////////////////////////////////////////
