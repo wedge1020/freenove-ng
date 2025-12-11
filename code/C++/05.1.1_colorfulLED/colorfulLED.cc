@@ -9,15 +9,11 @@
 //
 // Pre-processor directives
 //
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
+#include <cstdint>
+#include <cstdlib>
 #include <wiringPi.h>
 #include <softPwm.h>
-
-#define  REDpin  0
-#define  GRNpin  1
-#define  BLUpin  2
+#include <iostream>
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -32,14 +28,14 @@ public:
     // Constructors
     //
     LED();
-    LED(int32_t r, int32_t g, int32_t b);
+    LED(int32_t redval, int32_t grnval, int32_t bluval, int32_t redpin, int32_t grnpin, int32_t blupin);
 
     ////////////////////////////////////////////////////////////////////////////////////////
     //
     // Function prototypes
     //
-    void     LEDsetup    (void);
-    void     LEDsetcolor (int32_t redval, int32_t grnval, int32_t bluval);
+    void LEDsetup    (void);
+    void LEDsetcolor (int32_t redval, int32_t grnval, int32_t bluval);
     
     void setRed(int32_t value);
     void setGreen(int32_t value);
@@ -53,16 +49,24 @@ private:
 
     ////////////////////////////////////////////////////////////////////////////////////////
     //
-    // Variables for storing the LEDs rgb values
+    // Variables for storing the LEDs rgb values and pins
     //
     int32_t  red;
     int32_t  green;
-    int32_t  blue;        
+    int32_t  blue;     
+    
+    int32_t  REDpin;//  0
+    int32_t  GRNpin;//  1
+    int32_t  BLUpin;//  2
 };
 
 int32_t  main (void)
 {
-
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Instantiate the LED class
+    //
     LED newLED;
     
     ////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +75,7 @@ int32_t  main (void)
     //
     if (wiringPiSetup () == -1)
     {
-        fprintf (stderr, "[ERROR] Could not initialize wiringPi library!\n");
+        std::cerr << "[ERROR] Could not initialize wiringPi library!\n";
         exit (1);
     }
 
@@ -81,7 +85,7 @@ int32_t  main (void)
     //
     newLED.LEDsetup ();
 
-    fprintf (stdout, "Program is starting (CTRL-c to interrupt) ...\n");
+    std::cout << "Program is starting (CTRL-c to interrupt) ...\n";
 
     while (1)
     {
@@ -104,7 +108,7 @@ int32_t  main (void)
         //
         // For informative feedback, display these values to the user
         //
-        fprintf (stdout, "red: %d,  green: %d, blue: %d \n", newLED.getRed(), newLED.getGreen(), newLED.getBlue());
+        std::cout << "red: " << newLED.getRed() << ", green: " << newLED.getGreen() << ", blue: " << newLED.getBlue() << "\n";
 
         ////////////////////////////////////////////////////////////////////////////////
         //
@@ -118,24 +122,32 @@ int32_t  main (void)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
-// LED::LED(): the parameterless constructor, initialize the member attributes to 0
+// LED::LED(): the parameterless constructor, initialize the member attributes to 
+// default values
 //
 LED::LED()
 {
     red = 0;
     green = 0;
     blue = 0;
+    REDpin = 0;
+    GRNpin = 1;
+    BLUpin = 2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //
-// LED::LED(r,g,b): the parametered constructor, initialize the member attributes to provided values
+// LED::LED(redval, grnval, bluval, redpin, grnpin, blupin): the parametered constructor, 
+// initialize the member attributes to provided values
 //
-LED::LED(int32_t redval, int32_t grnval, int32_t bluval)
+LED::LED(int32_t redval, int32_t grnval, int32_t bluval, int32_t redpin, int32_t grnpin, int32_t blupin)
 {
     red = redval;
     green = grnval;
     blue = bluval;
+    REDpin = redpin;
+    GRNpin = grnpin;
+    BLUpin = blupin;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
